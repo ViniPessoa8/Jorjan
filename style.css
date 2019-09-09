@@ -6,24 +6,29 @@ html, body {
 }
 
 body {
-    display: flex;
-    flex-direction: column;
     align-items: center;
     font-family:'Nunito Sans', sans-serif;
-    background: #262626;
-    color: #fff;
+    color: #262626;
 }
 
 /* Navbar ============================================== */
 nav {
-    display: flex;
-    justify-content: space-between;
-    width: 70%;
-    min-height: 50px;
-    align-items: center;
+    background: #262626;
+    padding-top: 10px;
+    color: #fff;
 }
 
-nav > .logo {
+.nav-container {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+}
+
+.nav-container > .logo {
     flex: 3;
     margin: 0;
     padding-left: 40px;
@@ -31,7 +36,7 @@ nav > .logo {
     font-size: 30px;
 }
 
-nav > ul {
+.nav-container > ul {
     margin: 0;
     flex: 1;
     list-style: none;
@@ -39,7 +44,7 @@ nav > ul {
     justify-content: space-evenly;
 }
 
-nav > ul > li > a {
+.nav-container > ul > li > a {
     transition: .2s;
     cursor: pointer;
     padding: 10px;
@@ -47,35 +52,27 @@ nav > ul > li > a {
     text-decoration: none;
 }
 
-nav > ul > li > a:hover {
+.nav-container > ul > li > a:hover {
     background: rgb(101, 103, 241);
     color: #fff;
 }
 
 /* Body =============================================== */
-.titulo {
-    background: gainsboro;
-    height: 12%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    font-size: 50px;
-}
-
-.bar {
+section {
     width: 100%;
     height: 60%;
     display: flex;
     justify-content: center;
 }
 
-.upperBar{
-    
-    background: palegoldenrod;
+.main-section{
+    height: 80%;
+    background: #262626;
+    color: white;
 }
 
-.midBar1 {
-    background: paleturquoise;
+.about-section {
+    
 }
 
 .midBar2 {
@@ -110,11 +107,14 @@ nav > ul > li > a:hover {
     align-items: center;
 }
 
-.rodape {
+
+/* Footer ======================================================== */
+footer {
     height: 10%;
     display: flex;
     justify-content: center;
-    background: grey;
+    background: #262626;
+    color: #fff;
     font-family: 'Nunito Sans', sans-serif;
     display: flex;
     align-items: center;
