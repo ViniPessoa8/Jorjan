@@ -5,6 +5,54 @@ html, body {
     width: 100%;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family:'Nunito Sans', sans-serif;
+    background: #262626;
+    color: #fff;
+}
+
+/* Navbar ============================================== */
+nav {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    min-height: 50px;
+    align-items: center;
+}
+
+nav > .logo {
+    flex: 3;
+    margin: 0;
+    padding-left: 40px;
+    box-sizing: border-box;
+    font-size: 30px;
+}
+
+nav > ul {
+    margin: 0;
+    flex: 1;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+nav > ul > li > a {
+    transition: .2s;
+    cursor: pointer;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+nav > ul > li > a:hover {
+    background: rgb(101, 103, 241);
+    color: #fff;
+}
+
+/* Body =============================================== */
 .titulo {
     background: gainsboro;
     height: 12%;
@@ -12,7 +60,6 @@ html, body {
     display: flex;
     justify-content: center;
     font-size: 50px;
-    font-family:'Nunito Sans', sans-serif;
 }
 
 .bar {
