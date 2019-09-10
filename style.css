@@ -195,14 +195,14 @@ section {
 }
 
 .main-section .secondary-image-container #cupcake {
-    fill: #ffc7dc;
+    fill: #da87a7;
     position: absolute;
     left: 35%;
     top: 55%;
 }
 
 .main-section .secondary-image-container > #spark-cupcake {
-    fill: #ffc7dc;
+    fill: #da87a7;
     left: 32%;
     top: 55%;
 }
@@ -317,12 +317,12 @@ section {
 }
 
 .about-section .secondary-image-container div #cupcake {
-    fill: #ffc7dc;
+    fill: #da87a7;
 }
 
 .about-section .secondary-image-container div #spark-cupcake {
     position: absolute;
-    fill: #ffc7dc;
+    fill: #da87a7;
 }
 
 
