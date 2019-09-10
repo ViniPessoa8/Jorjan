@@ -9,7 +9,7 @@ Site responsivo para Mobile.
 - Eduardo Jorge
 - Gustavo Jordan
 - Laís Calderaro
-- Paulo Gustavo
+- Paulo Guilherme
 - Vinícius Pessoa
 
 ### Proposta de valor
