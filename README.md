@@ -8,8 +8,9 @@ Site responsivo para Mobile.
 ### Grupo
 - Eduardo Jorge
 - Gustavo Jordan
+- Jansen Junior
 - Laís Calderaro
-- Paulo Gustavo
+- Paulo Guilherme
 - Vinícius Pessoa
 
 ### Proposta de valor
