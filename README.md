@@ -22,4 +22,4 @@ Site responsivo para Mobile.
 #### Sem o app
 ![Drag Racing](doc/diagramas/Diagrama_Atividades.jpg)
 #### Com o app
-![Drag Racing](doc/diagramas/Diagrama_Atividades_Com_App.jpg)
+![Drag Racing](doc/diagramas/Diagrama_Atividades_Com_App.png)
