@@ -422,3 +422,28 @@ footer svg {
 footer svg:hover {
     fill: #6567f1;
 }
+
+
+
+@media (max-width: 1366px) {
+    .faq-section .image-container svg {
+        height: 300px;
+    }
+
+    .faq-section .body-container > div > button,
+    .faq-section .body-container > div > input {
+        font-size: 16px
+    }
+
+    .faq-section .body-container > div > button {
+        padding: 15px;
+    }
+
+    .about-section .main-image-container > svg {
+        height: 150px;
+    }
+
+    .description-wrapper .title {
+        font-size: 45px;
+    }
+}
