@@ -8,6 +8,7 @@ Site responsivo para Mobile.
 ### Grupo
 - Eduardo Jorge
 - Gustavo Jordan
+- Jansen Junior
 - Laís Calderaro
 - Paulo Guilherme
 - Vinícius Pessoa
