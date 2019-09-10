@@ -14,8 +14,11 @@ body {
 /* Navbar ============================================== */
 nav {
     background: #262626;
-    padding-top: 10px;
+    padding: 10px 0;
     color: #fff;
+    display: inline-block;
+    width: 100%;
+    box-shadow: 0 1px 10px #111;
 }
 
 .nav-container {
@@ -50,11 +53,12 @@ nav {
     padding: 10px;
     color: #fff;
     text-decoration: none;
+    border-radius: 4px;
 }
 
 .nav-container > ul > li > a:hover {
     background: rgb(101, 103, 241);
-    color: #fff;
+    box-shadow: 0 0 5px #6567f1; 
 }
 
 /* Body =============================================== */
@@ -68,8 +72,180 @@ section {
 .main-section{
     height: 80%;
     background: #262626;
-    color: white;
+    color: #ffffff;
 }
+
+.description-container {
+    position: relative;
+    flex: 1;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Main Section Image */
+.main-section .main-image-container {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.main-section .main-image-container > svg {
+    fill: #face87;
+    width: 40%;
+    height: 60%;
+}
+
+.main-section .main-image-container > .spark {
+    position: absolute;
+    fill: none;
+    width: 20px;
+    height: 20px;
+    fill: #face87;
+}
+
+.main-section .main-image-container > .spark > path {
+    stroke: inherit;
+}
+
+.main-section .main-image-container > #spark-1 {
+    top: 30%;
+    left: 35%;
+}
+
+.main-section .main-image-container > #spark-2 {
+    bottom: 30%;
+    right: 35%;
+}
+
+.main-section .secondary-image-container {
+    flex: 3;
+    position: relative;
+}
+
+.main-section .secondary-image-container > .spark {
+    position: absolute;
+    fill: none;
+    width: 20px;
+    height: 20px;
+}
+
+.main-section .secondary-image-container > .spark > path {
+    stroke:inherit;
+}
+
+.main-section .secondary-image-container #donut {
+    fill: #da87a7;
+    position: absolute;
+    left: 30%;
+}
+
+.main-section .secondary-image-container > #spark-donut {
+    fill: #da87a7;
+    left: 25%;
+}
+
+
+.main-section .secondary-image-container #cookie {
+    fill: #8a5241;
+    position: absolute;
+    right: 30%;
+    top: 30%;
+}
+
+.main-section .secondary-image-container > #spark-cookie {
+    fill: #8a5241;
+    right: 25%;
+    top: 30%;
+}
+
+.main-section .secondary-image-container #cupcake {
+    fill: #ffc7dc;
+    position: absolute;
+    left: 35%;
+    top: 55%;
+}
+
+.main-section .secondary-image-container > #spark-cupcake {
+    fill: #ffc7dc;
+    left: 32%;
+    top: 55%;
+}
+
+/* Main Section Description */
+.main-section .description-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.main-section .description-wrapper > .title-container {
+    flex: 2;
+    padding: 0 90px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.main-section .description-wrapper .title {
+    font-size: 50px;
+    padding-top: 10px;
+    position: relative;
+}
+
+.main-section .description-wrapper .title::after {
+    content: "";
+    width: 102%;
+    height: 1px;
+    background: #6567f1;
+    box-shadow: 0 0 5px #6567f1; 
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.main-section .description-wrapper > .body-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 0 90px;
+}
+
+.main-section .description-wrapper > .body-container > span {
+    font-size: 20px;
+    margin: 40px 20px;
+}
+
+
+/* 
+.main-section > .description-container .title {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+    padding: 5px 10px;
+    border-bottom: 2px solid white;
+}
+
+.main-section > .description-container .body-container {
+    flex: 1;
+} */
+
+
+
+
+
+
+
+
+
+
+
+/* 
 
 .about-section {
     
@@ -83,7 +259,7 @@ section {
     background: peru;
 }
 
-.imagem {
+.image-container {
     flex: 1;
     max-width: 30%;
     display: flex;
@@ -91,7 +267,7 @@ section {
     justify-content: center;
 }
 
-.imagem > img {
+.image-container > img {
     width: 50%;
 }
 
@@ -118,4 +294,4 @@ footer {
     font-family: 'Nunito Sans', sans-serif;
     display: flex;
     align-items: center;
-}
+} 
