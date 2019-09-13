@@ -3,7 +3,7 @@ permalink: /index.html
 ---
 
 # MPS
-Site responsivo para Mobile.
+Webapp makertplace para venda de doces e salgados nas universidades.
 
 ### Grupo
 - Eduardo Jorge
