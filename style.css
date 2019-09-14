@@ -325,12 +325,28 @@ section {
     fill: #da87a7;
 }
 
+/* Download */
+.download-section{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.download-section .title {
+    font-size: 50px;
+    padding-top: 2000;
+}
+
+.download-section .play-store {
+    margin-top: 5%;
+    width: 150px;
+}
 
 /* FAQ Section */
 .faq-section {
     box-shadow: 0 0 14px 4px rgb(0, 0, 0);
     position: relative;
-    color: #fff;
+    background: #fff;
 }
 
 .faq-section .image-container {
@@ -343,6 +359,7 @@ section {
 
 .faq-section .description-container .title-container {
     flex: 1;
+    color:#262626;
 }
 
 .faq-section .description-container .body-container {
@@ -371,7 +388,7 @@ section {
     font-size: 25px;
     background: none;
     border: none;
-    background: #fbfbfb;
+    background: #262626;
     color: #262626;
     padding: 15px;
     border-radius: 10px 0 0 10px;
@@ -399,24 +416,6 @@ section {
     background: #6567f1;
     box-shadow: 0 0 5px #6567f1; 
     color: white;
-}
-
-/* Download */
-.download-section{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-.download-section .title {
-    font-size: 50px;
-    padding-top: 2000;
-}
-
-.download-section .play-store {
-    margin-top: 5%;
-    
-    width: 150px;
 }
 
 /* Footer ======================================================== */
