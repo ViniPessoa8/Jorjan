@@ -328,7 +328,9 @@ section {
 
 /* FAQ Section */
 .faq-section {
+    box-shadow: 0 0 14px 4px rgb(0, 0, 0);
     position: relative;
+    color: #fff;
 }
 
 .faq-section .image-container {
@@ -399,6 +401,24 @@ section {
     color: white;
 }
 
+/* Download */
+.download-section{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.download-section .title {
+    font-size: 50px;
+    padding-top: 2000;
+}
+
+.download-section .play-store {
+    margin-top: 5%;
+    
+    width: 150px;
+}
+
 /* Footer ======================================================== */
 footer {
     height: 10%;
@@ -409,7 +429,7 @@ footer {
     font-family: 'Nunito Sans', sans-serif;
     display: flex;
     align-items: center;
-    box-shadow: 0 0 12px 2px rgb(0, 0, 0);
+    /* box-shadow: 0 0 12px 2px rgb(0, 0, 0); */
 } 
 
 footer svg {
