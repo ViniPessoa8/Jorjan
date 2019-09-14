@@ -3,7 +3,8 @@ permalink: /index.html
 ---
 
 # MPS
-**Repositório de desenvolvimento**
+**Branch de desenvolvimento**
+
 Webapp makertplace para venda de doces e salgados nas universidades.
 
 ### Grupo
