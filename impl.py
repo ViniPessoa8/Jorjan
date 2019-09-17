@@ -49,11 +49,23 @@ class Comprador(Usuario):
         super().__init__()
 
 class Pedido:
-    itens = []
-    observacao = None
+
+    def __init__(self, nickComprador, nickVendedor, formaRetirada, formaPagamento, carrinho, observacao):
+        self.nickVendedor = nickVendedor
+        self.nickComprador = nickComprador
+        self.formaRetirada = formaRetirada
+        self.formaPagamento = formaPagamento
+        self.carrinho = carrinho
+        self.observacao = observacao
+
+    def calcularTotal():
+        total = 0.0
+        for item in carrinho:
+            total += item.produto.preco * item.quantidade
+        self.total = total
 
     def enviarNotificacao():
-        print("Enviar Notificação")
+        print("Vendedor notificado.")
 
 class Notificacao:
     mensagem = None
@@ -131,6 +143,8 @@ def finalizar():
         total = 0.0
         for item in carrinho:
             total += item.produto.preco * item.quantidade
+
+        pedido = Pedido()
 
         print("TOTAL: R$" + str(total))
 
@@ -262,11 +276,3 @@ while escolha >= 0:
                             if (not achou):
                                 print("Opção inválida")
                                 escolha5 = 0
-
-
-        
-                
-
-
-
-
