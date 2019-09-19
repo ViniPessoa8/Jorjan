@@ -1,5 +1,5 @@
 ---
-permalink: /index.html
+permalink: /src/index.html
 ---
 
 # MPS
