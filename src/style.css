@@ -337,7 +337,7 @@ section {
 
 .member-title {
     margin-top: 30px;
-    font-size: 55px;
+    font-size: 50px;
     margin-bottom: 30px;
 }
 
@@ -391,13 +391,42 @@ section {
     color: #262626;
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-align: center;
     box-shadow: 0 0 14px 4px rgb(0, 0, 0);
 }
 .download-section .title {
     font-size: 50px;
     padding-top: 2000;
+    margin: 30px 70px 30px 70px;
+}
+
+.download-section {
+    align-items: center;
+}
+
+.link-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.download-section .image-container {
+    background-color: #262626;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    align-items: center;
+    margin: 30px 70px 30px 70px;
+}
+  
+.download-section .image-container img {
+    position: relative;
+    bottom: 0;
+    width: 60%;
+    margin-top: 30px;
+    margin-left: 30px;
 }
 
 .download-section .play-store {
