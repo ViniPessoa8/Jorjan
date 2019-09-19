@@ -343,7 +343,7 @@ section {
 
 .member-containers {
     display: flex;
-    flex-direction: row
+    flex-direction: row;
 }
 
 .member-container {
