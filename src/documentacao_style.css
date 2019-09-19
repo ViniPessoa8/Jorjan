@@ -1,3 +1,17 @@
 .classes {
     width:80%;
 }
+
+.rf-tabela {
+    text-align: center;
+}
+
+.rf-tabela th {
+    text-align: center;
+    border: 1px solid #333;
+}
+
+.rf-tabela td {
+    padding: 2px;
+    border: 1px solid #333;
+}
