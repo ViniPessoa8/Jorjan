@@ -325,16 +325,108 @@ section {
     fill: #da87a7;
 }
 
-/* Download */
-.download-section{
-    position: relative;
+/* Membros do grupo */
+.member-section {
+    padding-top: 60px;
+    padding-bottom: 80px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.member-title {
+    margin-top: 30px;
+    font-size: 50px;
+    margin-bottom: 30px;
+}
+
+.member-containers {
+    display: flex;
+    flex-direction: row;
+}
+
+.member-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.member-img {
+    background-color: #aaa;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+  
+.member-img img {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.member-description{
     text-align: center;
+    justify-content: space-around;
+    padding-top: 20px;
+    display:flex;
+    flex-direction: column;
+}
+
+.member-name {
+    margin-top: 30px;
+    font-size: 30px;
+}
+
+.member-functions {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+/* Download */
+.download-section{
+    background: #fff;
+    color: #262626;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    box-shadow: 0 0 14px 4px rgb(0, 0, 0);
 }
 .download-section .title {
     font-size: 50px;
     padding-top: 2000;
+    margin: 30px 70px 30px 70px;
+}
+
+.download-section {
+    align-items: center;
+}
+
+.link-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.download-section .image-container {
+    background-color: #262626;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    align-items: center;
+    margin: 30px 70px 30px 70px;
+}
+  
+.download-section .image-container img {
+    position: relative;
+    bottom: 0;
+    width: 60%;
+    margin-top: 30px;
+    margin-left: 30px;
 }
 
 .download-section .play-store {
@@ -344,9 +436,9 @@ section {
 
 /* FAQ Section */
 .faq-section {
-    box-shadow: 0 0 14px 4px rgb(0, 0, 0);
+    color: #fff;
+    background: #262626;
     position: relative;
-    background: #fff;
 }
 
 .faq-section .image-container {
@@ -359,7 +451,7 @@ section {
 
 .faq-section .description-container .title-container {
     flex: 1;
-    color:#262626;
+    color:#fff;
 }
 
 .faq-section .description-container .body-container {
@@ -388,7 +480,7 @@ section {
     font-size: 25px;
     background: none;
     border: none;
-    background: #262626;
+    background: #fff;
     color: #262626;
     padding: 15px;
     border-radius: 10px 0 0 10px;
@@ -423,16 +515,16 @@ footer {
     height: 10%;
     display: flex;
     justify-content: flex-end;
-    background: #262626;
-    color: #fff;
+    background: #fff;
+    color: #262626;
     font-family: 'Nunito Sans', sans-serif;
     display: flex;
     align-items: center;
-    /* box-shadow: 0 0 12px 2px rgb(0, 0, 0); */
+    box-shadow: 0 0 14px 4px rgb(0, 0, 0);
 } 
 
 footer svg {
-    fill: white;
+    fill: #262626;
     width: 30px;
     margin-right: 50px;
     transition: .2s fill;
