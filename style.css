@@ -1,0 +1,560 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    align-items: center;
+    font-family:'Nunito Sans', sans-serif;
+    background: #2c2c2c;
+    color: #fff;
+}
+
+/* Navbar ============================================== */
+nav {
+    padding: 10px 0;
+    display: inline-block;
+    width: 100%;
+    box-shadow: 0 1px 10px #111;
+}
+
+.nav-container {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+}
+
+.nav-container > .logo {
+    flex: 3;
+    margin: 0;
+    padding-left: 40px;
+    box-sizing: border-box;
+    font-size: 30px;
+}
+
+.nav-container > ul {
+    margin: 0;
+    flex: 1;
+    list-style: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nav-container > ul > li > a {
+    transition: .2s;
+    cursor: pointer;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.nav-container > ul > li > a:hover {
+    background: #6567f1;
+    box-shadow: 0 0 5px #6567f1; 
+}
+
+/* Body =============================================== */
+section {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+}
+
+.description-container {
+    position: relative;
+    flex: 1;
+}
+
+.description-wrapper > .body-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    padding-left: 90px;
+    padding-right: 130px;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.description-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.description-wrapper > .title-container {
+    flex: 2;
+    padding: 0 90px;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 80px;
+}
+
+.description-wrapper .title {
+    font-size: 50px;
+    padding-top: 10px;
+    position: relative;
+}
+
+.description-wrapper > .body-container > span {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.main-section{
+    height: 80%;
+}
+
+/* Main Section Image */
+.main-section .main-image-container {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.main-section .main-image-container > svg {
+    fill: #face87;
+    width: 40%;
+    height: 60%;
+}
+
+.main-section .main-image-container > .spark {
+    position: absolute;
+    fill: none;
+    width: 20px;
+    height: 20px;
+    fill: #face87;
+}
+
+.main-section .main-image-container > .spark > path {
+    stroke: inherit;
+}
+
+.main-section .main-image-container > #spark-1 {
+    top: 30%;
+    left: 35%;
+}
+
+.main-section .main-image-container > #spark-2 {
+    bottom: 30%;
+    right: 35%;
+}
+
+.main-section .secondary-image-container {
+    flex: 3;
+    position: relative;
+}
+
+.main-section .secondary-image-container > .spark {
+    position: absolute;
+    fill: none;
+    width: 20px;
+    height: 20px;
+}
+
+.main-section .secondary-image-container > .spark > path {
+    stroke:inherit;
+}
+
+.main-section .secondary-image-container #donut {
+    fill: #da87a7;
+    position: absolute;
+    left: 30%;
+}
+
+.main-section .secondary-image-container > #spark-donut {
+    fill: #da87a7;
+    left: 25%;
+}
+
+
+.main-section .secondary-image-container #cookie {
+    fill: #8a5241;
+    position: absolute;
+    right: 30%;
+    top: 30%;
+}
+
+.main-section .secondary-image-container > #spark-cookie {
+    fill: #8a5241;
+    right: 25%;
+    top: 30%;
+}
+
+.main-section .secondary-image-container #cupcake {
+    fill: #da87a7;
+    position: absolute;
+    left: 35%;
+    top: 55%;
+}
+
+.main-section .secondary-image-container > #spark-cupcake {
+    fill: #da87a7;
+    left: 32%;
+    top: 55%;
+}
+
+/* Main Section Description */
+.main-section .description-wrapper .title::after {
+    content: "";
+    width: 102%;
+    height: 1px;
+    background: #6567f1;
+    box-shadow: 0 0 5px #6567f1; 
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+/* About Section */
+.about-section {
+    background: #fff;
+    color: #262626;
+    box-shadow: 0 0 14px 4px rgb(0, 0, 0);
+}
+
+.about-section .image-container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.about-section .main-image-container {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.about-section .main-image-container::after {
+    content: "";
+    width: 50%;
+    height: 3px;
+    background: #393b8f;
+    position: absolute;
+    bottom: 0;
+}
+
+.about-section .main-image-container .spark {
+    position: absolute;
+    width: 30px;
+}
+
+.about-section .main-image-container #spark-up {
+    top: -10%;
+    right: 30%;
+}
+
+.about-section .main-image-container #spark-down {
+    top: 20%;
+    left: 30%;
+}
+
+
+.about-section .main-image-container > svg {
+    height: 200px;
+    fill: #02045a;
+}
+
+
+.about-section .secondary-image-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-section .secondary-image-container div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.about-section .secondary-image-container div .spark {
+    width: 30px;
+    top: -20%;
+    right: 10%;
+    transform: translateX(10%);
+}
+
+.about-section .secondary-image-container div path {
+    stroke: inherit;
+}
+
+.about-section .secondary-image-container div #cookie {
+    fill: #8a5241;
+}
+
+.about-section .secondary-image-container div #spark-cookie {
+    position: absolute;
+    fill: #8a5241;
+    top: 20%;
+}
+
+.about-section .secondary-image-container div #donut {
+    fill: #da87a7;
+}
+
+.about-section .secondary-image-container div #spark-donut {
+    position: absolute;
+    fill: #da87a7;
+}
+
+.about-section .secondary-image-container div #cupcake {
+    fill: #da87a7;
+}
+
+.about-section .secondary-image-container div #spark-cupcake {
+    position: absolute;
+    fill: #da87a7;
+}
+
+/* Membros do grupo */
+.member-section {
+    padding-top: 60px;
+    padding-bottom: 80px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.member-title {
+    margin-top: 30px;
+    font-size: 50px;
+    margin-bottom: 30px;
+}
+
+.member-containers {
+    display: flex;
+    flex-direction: row;
+}
+
+.member-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.member-img {
+    background-color: #aaa;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+  
+.member-img img {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.member-description{
+    text-align: center;
+    justify-content: space-around;
+    padding-top: 20px;
+    display:flex;
+    flex-direction: column;
+}
+
+.member-name {
+    margin-top: 30px;
+    font-size: 30px;
+}
+
+.member-functions {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+/* Download */
+.download-section{
+    background: #fff;
+    color: #262626;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    box-shadow: 0 0 14px 4px rgb(0, 0, 0);
+}
+.download-section .title {
+    font-size: 50px;
+    padding-top: 2000;
+    margin: 30px 70px 30px 70px;
+}
+
+.download-section {
+    align-items: center;
+}
+
+.link-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.download-section .image-container {
+    background-color: #262626;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    align-items: center;
+    margin: 30px 70px 30px 70px;
+}
+  
+.download-section .image-container img {
+    position: relative;
+    bottom: 0;
+    width: 60%;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.download-section .play-store {
+    margin-top: 5%;
+    width: 150px;
+}
+
+/* FAQ Section */
+.faq-section {
+    color: #fff;
+    background: #262626;
+    position: relative;
+}
+
+.faq-section .image-container {
+    position: relative;
+}
+
+.faq-section .description-wrapper {
+    display: flex;
+}
+
+.faq-section .description-container .title-container {
+    flex: 1;
+    color:#fff;
+}
+
+.faq-section .description-container .body-container {
+    flex: 1;
+}
+
+.faq-section .image-container svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 400px;
+    fill: #6567f1;
+}
+
+.faq-section .body-container > div {
+    width: 100%;
+    height: 80%;
+    padding: 0 40px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.faq-section .body-container > div > input {
+    font-size: 25px;
+    background: none;
+    border: none;
+    background: #fff;
+    color: #262626;
+    padding: 15px;
+    border-radius: 10px 0 0 10px;
+    width: 70%;
+    margin-right: 10px;
+}
+
+.faq-section .body-container > div > input::placeholder {
+    color: #585858;
+}
+
+.faq-section .body-container > div > button {
+    background: #8888f3;
+    border: none;
+    color: #262626;
+    font-size: 20px;
+    padding: 18px;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    transition: .2s background, .2s color, .2s color;
+    position: relative;
+}
+
+.faq-section .body-container > div > button:hover {
+    background: #6567f1;
+    box-shadow: 0 0 5px #6567f1; 
+    color: white;
+}
+
+/* Footer ======================================================== */
+footer {
+    height: 10%;
+    display: flex;
+    justify-content: flex-end;
+    background: #fff;
+    color: #262626;
+    font-family: 'Nunito Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 14px 4px rgb(0, 0, 0);
+} 
+
+footer svg {
+    fill: #262626;
+    width: 30px;
+    margin-right: 50px;
+    transition: .2s fill;
+}
+
+footer svg:hover {
+    fill: #6567f1;
+}
+
+
+
+@media (max-width: 1366px) {
+    .faq-section .image-container svg {
+        height: 300px;
+    }
+
+    .faq-section .body-container > div > button,
+    .faq-section .body-container > div > input {
+        font-size: 16px
+    }
+
+    .faq-section .body-container > div > button {
+        padding: 15px;
+    }
+
+    .about-section .main-image-container > svg {
+        height: 150px;
+    }
+
+    .description-wrapper .title {
+        font-size: 45px;
+    }
+}
