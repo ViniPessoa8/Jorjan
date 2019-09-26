@@ -1,5 +1,5 @@
 .classes {
-    width:80%;
+    width:100%;
 }
 
 .tabela {
@@ -18,4 +18,47 @@
 
 #glossario-link{
     font-size: 28px;
+}
+
+#capa {
+    text-align: center;
+}
+
+#capa h1{
+    font-size: 60px;
+}
+
+#capa h2{
+    font-size: 40px;
+}
+
+.doc{
+    /* text-align: center; */
+    /* align-content: center; */
+    margin: 0 10% 0 10%;
+}
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}
+
+@page {
+    size: A4;
+}
+
+.caso-de-uso{
+    width:90%;
+    border: solid black 1px;
+}
+
+#modelagem-proposta img {
+    width: 105%;
+}
+
+.lista {
+    font-size: 20px;
 }

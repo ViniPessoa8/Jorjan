@@ -6,334 +6,39 @@
         <link rel="stylesheet" type="text/css" href="documentacao_style.css">
     </head>
     <body>
-        <p>/ <a href="../index.html">Home</a> / Documentação</p>
-        <h1 id="mps">Jorjan - Documentação</h1>
-        <hr>
-        <a id="glossario-link" href="glossario.html" target="_blank">Glossário</a>
-        <h1>Sumário</h1>
-        <ol>
-            <li><a HREF="#grupo">Grupo</a></li>
-            <li><a HREF="#proposta-valor">Proposta de valor</a></li>
-            <li><a HREF="#diagramas">Diagramas</a></li>
-            <ol>
-                <li><a HREF="#atividades-sem-app">Diagrama de Atividades (Sem o app)</a></li>
-                <li><a HREF="#atividades">Diagrama de Atividades</a></li>
-                <li><a HREF="#classes">Diagrama de Classes</a></li>
-                <li><a HREF="#caso-de-uso">Diagrama de Caso de Uso</a></li>
+        <p class="no-print">/ <a href="../index.html">Home</a> / Documentação</p>
+        <div class="doc">
+            <div id="capa">
+                <h1 id="titulo">Documentação</h1>
+                <h2 id="sub-titulo">Jorjan</h2>
+            </div>
+            <hr>
+            <h2 id="grupo">Grupo</h2>
+            <ul>
+                <li>Gustavo Jordan</li>
+                <li>Jansen Junior</li>
+                <li>Laís Calderaro</li>
+                <li>Paulo Guilherme</li>
+                <li>Vinícius Pessoa</li>
+            </ul>
+            <hr>
+            <h2 id="proposta-valor">Objetivo</h2>
+            <p>Este app tem como propostas de valores:</p>
+            <ul>
+                <li>Facilitar a busca por vendedores, evitando o gasto de tempo;</li>
+                <li>Intermediar a trasação, no caso de pagamento no cartão;</li>
+                <li>Mostrar todos os vendedores próximos, aumentando as opções;</li>
+                <li>Aumentar o lucro dos vendedores aumentando a visibilidade deles;</li>
+            </ul>
+            <hr>
+            <ol class="lista">
+                <li><a HREF="glossario.html">Glossário</a></li>
+                <li><a HREF="modelagem.html">Modelagem de negócios</a></li>
+                <li><a HREF="requisitos.html">Requisitos</a></li>
             </ol>
-            <li><a HREF="#RF">Requisitos Funcionais</a></li>
-            <li><a HREF="#RNF">Requisitos Não-Funcionais</a></li>
-        </ol>
-        <hr>
-        <p>Webapp makertplace para venda de doces e salgados nas universidades.</p>
-        <h2 id="grupo">Grupo</h2>
-        <ul>
-            <li>Gustavo Jordan</li>
-            <li>Jansen Junior</li>
-            <li>Laís Calderaro</li>
-            <li>Paulo Guilherme</li>
-            <li>Vinícius Pessoa</li>
-        </ul>
-        <h2 id="proposta-valor">Proposta de valor</h2>
-        <p>Este app tem como propostas de valores:</p>
-        <ul>
-            <li>Facilitar a busca por vendedores, evitando o gasto de tempo;</li>
-            <li>Intermediar a trasação, no caso de pagamento no cartão;</li>
-            <li>Mostrar todos os vendedores próximos, aumentando as opções;</li>
-            <li>Aumentar o lucro dos vendedores aumentando a visibilidade deles;</li>
-        </ul>
-        <h1 id="diagramas">Diagramas</h2>
-        <h2 id="atividades-sem-app">Diagrama de atividades sem o app</h1>
-        <img src="../img/diagramas/Diagrama_Atividades.jpg" alt="Diagrama_Atividades" />
-        <h2 id="atividades">Diagrama de atividades com o app</h2>
-        <img src="../img/diagramas/Diagrama_Atividades_Com_App.png" alt="Diagrama_Atividades_Com_App" />
-        <h2 id="classes">Diagrama de Classes</h2>
-        <img class="classes" src="../img/diagramas/Diagrama_Classes.jpg" alt="Diagrama_Classes" />
-        <h2 id="caso-de-uso">Diagrama de Caso de Uso</h2>
-        <img class="caso-de-uso" src="../img/diagramas/Diagrama_Caso_De_Uso.png" alt="Diagrama_Classes" />
-        
-        <h1 id="RF">Requisitos Funcionais</h1>
-        <table class="tabela">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Descrição</th>
-                    <th>Recorrência</th>
-                    <th>Criticidade</th>
-                    <th>Prioridade</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>RF001</td>
-                    <td>Cadastrar_Usuario</td>
-                    <td>1</td>
-                    <td>10</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>RF002</td>
-                    <td>Cadastrar_Produto</td>
-                    <td>3</td>
-                    <td>10</td>
-                    <td>2</td>
-                </tr>
-                <tr>
-                    <td>RF003</td>
-                    <td>Cadastrar_Pedido</td>
-                    <td>5</td>
-                    <td>8</td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td>RF004</td>
-                    <td>Realizar_Login</td>
-                    <td>2</td>
-                    <td>10</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>RF005</td>
-                    <td>Listar_Categorias</td>
-                    <td>10</td>
-                    <td>10</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>RF006</td>
-                    <td>Listar_Vendedores</td>
-                    <td>10</td>
-                    <td>8</td>
-                    <td>6</td>
-                    </tr>
-                <tr>
-                    <td>RF007</td>
-                    <td>Listar_Produtos</td>
-                    <td>10</td>
-                    <td>10</td>
-                    <td>7</td>
-                </tr>
-                <tr>
-                    <td>RF008</td>
-                    <td>Selecionar_Produto</td>
-                    <td>5</td>
-                    <td>8</td>
-                    <td>8</td>
-                </tr>
-                <tr>
-                    <td>RF009</td>
-                    <td>Adicionar_Item_Carrinho</td>
-                    <td>3</td>
-                    <td>8</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>RF010</td>
-                    <td>Remover_Item_Carrinho</td>
-                    <td>5</td>
-                    <td>8</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>RF011</td>
-                    <td>Calcular_Total</td>
-                    <td>8</td>
-                    <td>8</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>RF012</td>
-                    <td>Finalizar_Compra</td>
-                    <td>5</td>
-                    <td>10</td>
-                    <td>11</td>
-                </tr>
-                <tr>
-                    <td>RF013</td>
-                    <td>Confirmar_Pedido</td>
-                    <td>8</td>
-                    <td>10</td>
-                    <td>12</td>
-                </tr>
-                <tr>
-                    <td>RF014</td>
-                    <td>Escolher_Forma_Pagamento</td>
-                    <td>2</td>
-                    <td>8</td>
-                    <td>13</td>
-                </tr>
-                    <tr>
-                    <td>RF015</td>
-                    <td>Confirmar_Pagamento</td>
-                    <td>8</td>
-                    <td>10</td>
-                    <td>14</td>
-                </tr>
-                <tr>
-                    <td>RF016</td>
-                    <td>Notificar_Vendedor</td>
-                    <td>8</td>
-                    <td>10</td>
-                    <td>15</td>
-                </tr>
-                <tr>
-                    <td>RF017</td>
-                    <td>Confirmar_Entrega</td>
-                    <td>8</td>
-                    <td>8</td>
-                    <td>16</td>
-                </tr>
-                <tr>
-                    <td>RF018</td>
-                    <td>Avaliar_Pedido</td>
-                    <td>8</td>
-                    <td>8</td>
-                    <td>17</td>
-                </tr>
-                <tr>
-                    <td>RF019</td>
-                    <td>Mostrar_Histórico</td>
-                    <td>5</td>
-                    <td>7</td>
-                    <td>18</td>
-                </tr>
-                <tr>
-                    <td>RF020</td>
-                    <td>Cadastrar_Foto_Produto</td>
-                    <td>3</td>
-                    <td>7</td>
-                    <td>19</td>
-                </tr>
-                <tr>
-                    <td>RF021</td>
-                    <td>Editar_Perfil</td>
-                    <td>2</td>
-                    <td>6</td>
-                    <td>20</td>
-                </tr>
-                <tr>
-                    <td>RF022</td>
-                    <td>Denunciar_Usuário</td>
-                    <td>2</td>
-                    <td>6</td>
-                    <td>21</td>
-                </tr>
-                <tr>
-                    <td>RF023</td>
-                    <td>Cancelar_Pedido</td>
-                    <td>4</td>
-                    <td>6</td>
-                    <td>22</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h1 id="RNF">Requisitos Não-Funcionais</h1>
-        <table class="tabela">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Descrição</th>
-                    <th>Métrica</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>RNF001</td>
-                    <td>Desempenho</td>
-                    <td>As ações do serviço devem ocorrer em menos de 3 segundos.</td>
-                </tr>
-                <tr>
-                    <td>RNF002</td>
-                    <td>Disponibilidade</td>
-                    <td>O serviço deve estar disponível no mínimo de 6:00h até 24:00h</td>
-                </tr>
-                <tr>
-                    <td>RNF003</td>
-                    <td>Documentação</td>
-                    <td>O sistema deve estar bem documentado.</td>
-                </tr>
-                <tr>
-                    <td>RNF004</td>
-                    <td>Segurança</td>
-                    <td>Os dados dos usuarios devem estar seguros de vazamentos.</td>
-                </tr>
-                <tr>
-                    <td>RNF005</td>
-                    <td>Portabilidade</td>
-                    <td>O sistema deve executar igualmente, tanto para web quanto para Android.</td>
-                </tr>
-                <tr>
-                    <td>RNF006</td>
-                    <td>Usabilidade</td>
-                    <td>O usuário deve conseguir realizar um pedido em menos de 5 minutos</td>
-                </tr>
-                <tr>
-                    <td>RNF007</td>
-                    <td>Manutenção</td>
-                    <td>O código deve ser padronizado, comentado e documentado.</td>
-                </tr>
-                <tr>
-                    <td>RNF008</td>
-                    <td>Compatibilidade</td>
-                    <td>O sistema deve ser compatível com os navegadores: Mozilla Firefox, Google Chrome e Safari</td>
-                    </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>O sistema deve ser compátível com versões Android acima da 6.0</td>
-                </tr>
-                <tr>
-                    <td>RNF009</td>
-                    <td>Suporte</td>
-                    <td>O suporte deve ser feito através de troca de email-s</td>
-                </tr>
-                <tr>
-                    <td>RNF010</td>
-                    <td>Tráfego</td>
-                    <td>O sistema deverá suportar 2000 usuários simultâneos</td>
-                </tr>
-                <tr>
-                    <td>RNF011</td>
-                    <td>Tamanho da tela</td>
-                    <td>O sistema deverá suportar telas a partir de 1280x720</td>
-                </tr>
-                <tr>
-                    <td>RNF012</td>
-                    <td>Tamanho da senha</td>
-                    <td>As senha devem ter de 6 a 16 caracteres.</td>
-                </tr>
-                <tr>
-                    <td>RNF013</td>
-                    <td>Tamanho do nickname</td>
-                    <td>O nickname deve ter de 6 a 16 caracteres.</td>
-                </tr>
-            </tbody>
-        </table>
-                
-        <h1>Regras de Negócios</h1>
-        <table class="tabela">
-            <thead>
-                <th>#</th>
-                <th>Descrição</th>
-            </thead>
-            <tr>
-                <td>RN001</td>
-                <td>Para efetuar o cadastro de um usuário, o sistema deve validar os dados.</td>
-            </tr>
-            <tr>
-                <td>RN002</td>
-                <td>Os vendedores terão prioridade na listagem de acordo com a sua avalição geral.</td>
-            </tr>
-            <tr>
-                <td>RN003</td>
-                <td>O usuário não poderá ter mais de um perfil vinculado ao seu e-mail.</td>
-            </tr>
-            <tr>
-                <td>RN004</td>
-                <td>O cancelamento de pedidos deve ser feito antes da confirmação.</td>
-            </tr>
-        </table>
+            
+            
+        </div>
         <script></script>
     </body>
 </html>
