@@ -69,3 +69,7 @@ body {
 #glossario {
     font-size:24px;
 }
+
+.doc img {
+ width:100%;
+}
