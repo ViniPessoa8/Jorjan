@@ -17,7 +17,7 @@ def get_all_users():
 def register_new_user(name, ps, email):
     ps     = sha1(ps.encode('utf-8')).hexdigest()
     conn   = get_connection()
-    result = ()
+    result = {}
 
     try:
         with conn.cursor() as c:
@@ -28,9 +28,9 @@ def register_new_user(name, ps, email):
             c.execute(register_user(name=name, ps=ps, email=email))
         conn.commit()
         
-        result = { 'name': name, 'ps': ps, 'email': email }
+        result = { 'name': name, 'email': email }
     except ValueError:
-        print("User Exists!")
+        result = { 'error': "User already exist" }
     finally:
         conn.close()
         return result
