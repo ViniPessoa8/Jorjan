@@ -27,6 +27,7 @@ def register_new_user(name, ps, email):
             
             c.execute(register_user(name=name, ps=ps, email=email))
         conn.commit()
+        
         result = { 'name': name, 'ps': ps, 'email': email }
     except ValueError:
         print("User Exists!")
