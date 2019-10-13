@@ -10,3 +10,6 @@ def get_user_by_email_ps(email, ps):
 def register_user(email, name, ps):
     return "INSERT INTO usuario(nome, email, senha) \
         VALUES ('%s', '%s', '%s');" % (name, email, ps)
+
+def remove_user(email, ps):
+    return "DELETE FROM usuario WHERE (email='%s' AND senha='%s')" % (email, ps)
