@@ -16,3 +16,4 @@ def remove_user(email, ps):
     
 def update_auth(auth, email, ps):
     return "UPDATE usuario SET auth = '%s' WHERE email = '%s' AND senha = '%s'" % (auth, email, ps)
+    

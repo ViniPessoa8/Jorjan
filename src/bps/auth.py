@@ -10,13 +10,10 @@ def login():
     ps    = request.json['password']
 
     user = check_login(email=email, ps=ps)
-    if (user != None):
-        user["auth"] = encode({'email': email, 'ps': ps}).decode("utf-8")
-    else :
-        return {
-            "Error":"Usuário não encontrado."
-        }
-    
+    if (user == None):
+        return { "error":"Usuário não encontrado." }
+    user["auth"] = encode({'email': email, 'ps': ps}).decode("utf-8")
+         
     update_auth_key(auth=user["auth"], email=email, ps=ps)
 
     return {
