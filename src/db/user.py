@@ -47,7 +47,7 @@ def register_new_user(name, ps, email):
             if c.fetchall() != ():
                 raise ValueError
                     
-            auth = jwt_encode({ 'email': email, 'ps': ps }).decode('utf-8')
+            auth = jwt_encode({ 'email': email, 'ps': ps })
             c.execute(register_user_with_auth(name=name, ps=ps, email=email, auth=auth))
         conn.commit()
         

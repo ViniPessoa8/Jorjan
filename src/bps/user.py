@@ -6,9 +6,7 @@ bp = Blueprint('user', __name__, url_prefix='/user')
 @bp.route('/list', methods=['GET'])
 def user_list():
     result = get_all_users()
-    return {
-        "users": result
-    }
+    return { "users": result }
 
 @bp.route('/register', methods=['POST'])
 def user_register():

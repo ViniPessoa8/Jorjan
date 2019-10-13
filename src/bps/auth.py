@@ -12,7 +12,8 @@ def login():
     user = check_login(email=email, ps=ps)
     if (user == None):
         return { "error":"Usuário não encontrado." }
-    user["auth"] = encode({'email': email, 'ps': ps}).decode("utf-8")
+
+    user["auth"] = encode({'email': email, 'ps': ps})
          
     update_auth_key(auth=user["auth"], email=email, ps=ps)
 
