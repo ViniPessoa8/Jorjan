@@ -1,4 +1,4 @@
-from ..util.jwt_manager import decode, encode
+from ..util.jwt_manager import encode
 from flask import Blueprint, request
 from ..db.user import check_login, update_auth_key
 
@@ -11,15 +11,13 @@ def login():
 
     user = check_login(email=email, ps=ps)
     if (user != None):
-        auth_key = encode({'email': email, 'ps': ps})
+        user["auth"] = encode({'email': email, 'ps': ps}).decode("utf-8")
     else :
         return {
             "Error":"Usuário não encontrado."
         }
     
-        
-    update_auth_key(auth=auth_key, email=email, ps=ps)
-    user = check_login(email=email, ps=ps)
+    update_auth_key(auth=user["auth"], email=email, ps=ps)
 
     return {
         'user': {

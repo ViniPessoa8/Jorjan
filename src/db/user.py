@@ -73,7 +73,8 @@ def update_auth_key(auth, email, ps):
     try:
         with conn.cursor() as c:
             c.execute(get_user_by_email_ps(email=email, ps=ps))
-            if(c.fetchone()):
+            result_query = c.fetchone()
+            if(result_query):
                 c.execute(update_auth(auth=auth, email=email, ps=ps))
         conn.commit()
     finally:
