@@ -13,3 +13,4 @@ def register_user(email, name, ps):
 
 def remove_user(email, ps):
     return "DELETE FROM usuario WHERE (email='%s' AND senha='%s')" % (email, ps)
+    

@@ -64,3 +64,4 @@ def remove_user_email_ps(email, ps):
     finally:
         conn.close()
         return result
+        
