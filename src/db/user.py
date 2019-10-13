@@ -8,7 +8,8 @@ from .user_queries import (
     get_user_by_email_ps, 
     register_user, 
     register_user_with_auth, 
-    remove_user
+    remove_user,
+    update_auth
 )
 
 def get_all_users():
@@ -87,3 +88,18 @@ def remove_user_email_ps(email, ps):
         conn.close()
         return result
         
+def update_auth_key(auth, email, ps):
+    ps     = sha1(ps.encode('utf-8')).hexdigest()
+    conn   = get_connection()
+    result = ()
+
+    try:
+        with conn.cursor() as c:
+            c.execute(get_user_by_email_ps(email=email, ps=ps))
+            result_query = c.fetchone()
+            if(result_query):
+                c.execute(update_auth(auth=auth, email=email, ps=ps))
+        conn.commit()
+    finally:
+        conn.close()
+        return result
