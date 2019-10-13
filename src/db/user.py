@@ -1,7 +1,15 @@
 from hashlib import sha1
 from ..config.db import get_connection
 from ..util.jwt_manager import encode as jwt_encode
-from .user_queries import get_users, get_user_by_email, get_user_by_email_ps, register_user, register_user_with_auth, remove_user
+from .user_queries import (
+    get_users, 
+    get_user_info,
+    get_user_by_email, 
+    get_user_by_email_ps, 
+    register_user, 
+    register_user_with_auth, 
+    remove_user
+)
 
 def get_all_users():
     conn   = get_connection()
@@ -11,6 +19,18 @@ def get_all_users():
         with conn.cursor() as c:
             c.execute(get_users())
             result = c.fetchall()    
+    finally:
+        conn.close()
+        return result
+
+def get_info(auth):
+    conn   = get_connection()
+    result = {}
+    try:
+        with conn.cursor() as c:
+            c.execute(get_user_info(auth))
+            result = c.fetchone()
+
     finally:
         conn.close()
         return result
