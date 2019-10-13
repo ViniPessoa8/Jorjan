@@ -19,3 +19,4 @@ def user_register():
     result = register_new_user(name=name, email=email, ps=ps)
 
     return result
+    
