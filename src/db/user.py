@@ -1,6 +1,7 @@
 from hashlib import sha1
 from ..config.db import get_connection
-from .user_queries import get_users, get_user_by_email, get_user_by_email_ps, register_user, remove_user
+from ..util.jwt_manager import encode as jwt_encode
+from .user_queries import get_users, get_user_by_email, get_user_by_email_ps, register_user, register_user_with_auth, remove_user
 
 def get_all_users():
     conn   = get_connection()
@@ -24,11 +25,12 @@ def register_new_user(name, ps, email):
             c.execute(get_user_by_email(email))
             if c.fetchall() != ():
                 raise ValueError
-            
-            c.execute(register_user(name=name, ps=ps, email=email))
+                    
+            auth = jwt_encode({ 'email': email, 'ps': ps }).decode('utf-8')
+            c.execute(register_user_with_auth(name=name, ps=ps, email=email, auth=auth))
         conn.commit()
         
-        result = { 'name': name, 'email': email }
+        result = { 'name': name, 'email': email, 'auth': auth }
     except ValueError:
         result = { 'error': "User already exist" }
     finally:
