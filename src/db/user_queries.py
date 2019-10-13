@@ -1,6 +1,9 @@
 def get_users():
     return "SELECT * FROM usuario;"
 
+def get_user_info(auth):
+    return "SELECT nome, email FROM usuario WHERE auth='%s';" % (auth)
+
 def get_user_by_email(email):
     return "SELECT * FROM usuario WHERE email='%s'" % (email)
 
