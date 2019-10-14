@@ -1,6 +1,7 @@
 from ..util.jwt_manager import encode
 from flask import Blueprint, request
-from ..db.user import check_login, update_auth_key
+from random import randint
+from ..db.auth import check_login, update_auth_key
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -13,7 +14,7 @@ def login():
     if (user == None):
         return { "error":"Usuário não encontrado." }
 
-    user["auth"] = encode({'email': email, 'ps': ps})
+    user["auth"] = encode({'email': email, 'ps': ps, 'bullet': randint(0, 255)})
          
     update_auth_key(auth=user["auth"], email=email, ps=ps)
 
