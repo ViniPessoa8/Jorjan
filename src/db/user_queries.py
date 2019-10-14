@@ -10,6 +10,9 @@ def get_user_by_email(email):
 def get_user_by_email_ps(email, ps):
     return "SELECT nome, email, auth, id FROM usuario WHERE (email='%s' and senha='%s')" % (email, ps)
 
+def get_user_by_auth(auth):
+    return "SELECT email FROM usuario WHERE auth='%s';" % auth
+
 def register_user(email, name, ps):
     return "INSERT INTO usuario(nome, email, senha) \
         VALUES ('%s', '%s', '%s');" % (name, email, ps)
@@ -23,4 +26,6 @@ def remove_user(email, ps):
     
 def update_auth(auth, email, ps):
     return "UPDATE usuario SET auth = '%s' WHERE email = '%s' AND senha = '%s'" % (auth, email, ps)
-    
+
+def update_pass_by_id(email, new_pass):
+    return "UPDATE usuario SET senha='%s' WHERE email='%s';" % (new_pass, email)

@@ -1,5 +1,6 @@
 from flask import Blueprint, request, abort
-from ..db.user import get_all_users, register_new_user, get_info
+from ..db.user import get_all_users, register_new_user, get_info, update_user_pass
+from ..db.auth import check_auth
 
 bp = Blueprint('user', __name__, url_prefix='/user')
 
@@ -20,7 +21,7 @@ def user_register():
     
 @bp.route('/info', methods=['GET'])
 def user_info():
-    auth = request.headers.get("Authorization")
+    auth   = request.headers.get("Authorization")
     result = get_info(auth)
 
     if result == None:
@@ -28,4 +29,20 @@ def user_info():
 
     return result
 
+@bp.route('/password', methods=['PUT'])
+def user_password():
+    auth     = request.headers.get("Authorization")
+    new_pass = request.json["password"]
 
+    user_email = check_auth(auth)
+
+    if user_email == None:
+        abort(403)
+
+    user_email = user_email["email"]
+    user_email = update_user_pass(user_email, new_pass)
+
+    if user_email == None:
+        return { "status": False } 
+
+    return { "status": True }

@@ -2,7 +2,8 @@ from hashlib import sha1
 from ..config.db import get_connection
 from .user_queries import (
     get_user_by_email_ps,
-    update_auth
+    update_auth,
+    get_user_by_auth
 )
 
 def check_login(email, ps):
@@ -13,6 +14,18 @@ def check_login(email, ps):
     try:
         with conn.cursor() as c:
             c.execute(get_user_by_email_ps(email=email, ps=ps))
+            result = c.fetchone()
+    finally:
+        conn.close()
+        return result
+
+def check_auth(auth):
+    conn   = get_connection()
+    result = None
+
+    try:
+        with conn.cursor() as c:
+            c.execute(get_user_by_auth(auth))
             result = c.fetchone()
     finally:
         conn.close()
