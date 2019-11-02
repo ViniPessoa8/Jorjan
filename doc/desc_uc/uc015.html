@@ -2,30 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>UC015 - Confirmar Pagamento</title>
+    <title>UC015 - Notificar Vendedor</title>
     <link rel="stylesheet" type="text/css" href="../documentacao_style.css">
 </head>
 <body>
     <p class="no-print">/ <a href="../../index.html">Home</a> / <a href="../documentacao.html">Documentação</a> / <a href="../requisitos.html">Requisitos</a> / UC015</p>
     <div class="doc">
-        <h1>UC015 - Confirmar Pagamento</h1>
+        <h1>UC015 - Notificar Vendedor</h1>
         <hr>
         <h2>Objetivo</h2>
-        <p>O ator deve poder confirmar um pedido.</p>
+        <p>O sistema deve enviar uma notifição ao vendedor, informando uma nova venda.</p>
         <h2>Atores</h2>
         <ul>
-            <li>Operadora do cartão</li>
+            <li>Vendedor</li>
         </ul>
         <h2>Pré-condições</h2>
         <ul>
-            <li>Um pagamento com o cartão deve ser solicitado pelo cliente.</li>
+            <li>O ator deve estar logado no sistema. </li>
+            <li>O ator deve ter produtos cadastrados.</li>
+            <li>O ator deve estar disponível para receber pedidos.</li>
         </ul>
         <h2>Pós-condições</h2>
         <ul>
-            <li>A operadora deve validar as informações do cartão e autorizar a compra caso haja saldo.</li>
+            <li>A notificação deve ser recebida pelo ator.</li>
         </ul>
         <h2>Fluxo Principal</h2>
-        <img src="../../img/uc/uc015.jpg" alt="Fluxo_Principal">
+        <img src="../../img/uc/uc016.jpg" alt="Fluxo_Principal">
     </div>
 </body>
 </html>
