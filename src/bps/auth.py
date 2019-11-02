@@ -20,7 +20,7 @@ def login():
 
     return {
         'user': {
-            'nome' : user["nome"],
+            'name' : user["name"],
             'email': user["email"],
             'auth' : user["auth"]
         }
