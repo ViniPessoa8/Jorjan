@@ -71,5 +71,15 @@ body {
 }
 
 .doc img {
- width:100%;
+    width:100%;
+}
+
+#tela-lista {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.tela {
+    margin: 0px 150px 0px 0px;
+    /* max-width: 45%; */
 }
