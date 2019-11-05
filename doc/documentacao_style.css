@@ -75,9 +75,11 @@ body {
 }
 
 #tela-lista {
-    /* display: inline-block;
-    inline-size: 4; */
     display: inline-flex;
-    /* align-items: center; */
-    justify-content: center;
+    flex-direction: row;
+}
+
+.tela {
+    margin: 0px 150px 0px 0px;
+    /* max-width: 45%; */
 }
