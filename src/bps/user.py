@@ -11,11 +11,17 @@ def user_list():
 
 @bp.route('/register', methods=['POST'])
 def user_register():
-    name  = request.json["name"]
-    email = request.json["email"]
-    ps    = request.json["password"]
+    params = request.json
 
-    result = register_new_user(name=name, email=email, ps=ps)
+    name     = params["name"]
+    email    = params["email"]
+    ps       = params["password"]
+    username = params["username"]
+
+    result = register_new_user(name=name, email=email, ps=ps, username=username)
+
+    if result == None:
+        abort(500)
 
     return result
     
