@@ -35,3 +35,11 @@ def qr_update_auth(auth, email, ps):
 
 def qr_update_pass_by_id(email, new_pass):
     return "UPDATE user SET password='%s' WHERE email='%s';" % (new_pass, email)
+
+def qr_get_product_owner(product_id):
+    return f"""
+        SELECT u.id, u.email
+        FROM user u
+        LEFT JOIN product p ON (p.owner_id = u.id)
+        WHERE p.id={product_id};
+    """

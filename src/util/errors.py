@@ -30,3 +30,12 @@ class CouldNotUpdateUser(BaseException):
 class CouldNotRegisterProduct(BaseException):
     def __str__(self):
         return "Não foi possível registrar o produto"
+
+# Sales ==============================================================
+class CouldNotStartCart(BaseException):
+    def __str__(self):
+        return "Não foi possível iniciar o carrinho"
+
+class CouldNotAddToCart(BaseException):
+    def __str__(self):
+        return "Não foi possível adicionar produto ao carrinho"
