@@ -143,4 +143,8 @@ use Jorjan;
     
 -- Remover Categoria
 	DELETE FROM Jorjan.category
-    WHERE id = ;
+    WHERE id = 1;
+    
+-- Selecionar Categoria
+	SELECT `name`
+    FROM Jorjan.category;
