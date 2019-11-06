@@ -1,7 +1,7 @@
 from hashlib import sha1
 from ..config.db import get_connection
 from ..util.jwt_manager import encode as jwt_encode
-from .user_queries import (
+from .queries.user_queries import (
     get_users, 
     get_user_info,
     get_user_by_email, 
@@ -80,11 +80,11 @@ def update_user_pass(email, new_pass):
     conn = get_connection()
     result = None
 
-    # try:
-    with conn.cursor() as c:
-        c.execute(update_pass_by_id(email, ps))
-    conn.commit()
-    result = new_pass
-# finally:
-    conn.close()
-    return result
+    try:
+        with conn.cursor() as c:
+            c.execute(update_pass_by_id(email, ps))
+        conn.commit()
+        result = new_pass
+    finally:
+        conn.close()
+        return result

@@ -1,6 +1,6 @@
 from hashlib import sha1
 from ..config.db import get_connection
-from .user_queries import (
+from .queries.user_queries import (
     get_user_by_email_ps,
     update_auth,
     get_user_by_auth

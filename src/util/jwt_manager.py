@@ -8,4 +8,3 @@ def encode(payload):
 
 def decode(encoded):
     return dcod(encoded, SECRET_KEY, algorithms=[ALGORITHM])
-    
