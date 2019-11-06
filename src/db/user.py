@@ -2,7 +2,7 @@ import sys
 from hashlib import sha1
 from ..config.db import get_connection
 from ..util.jwt_manager import encode as jwt_encode
-from ..util.errors import EmailAlreadyRegistered, UsernameAlreadyRegistered
+from ..util.errors import EmailAlreadyRegistered, UsernameAlreadyRegistered, error_resp, CouldNotRegisterUser
 from .queries.user_queries import (
     get_users, 
     get_user_info,
@@ -58,11 +58,13 @@ def register_new_user(name, ps, email, username):
             c.execute(register_user_with_auth(name=name, ps=ps, email=email, auth=auth, username=username))
         conn.commit()
         
-        result = { 'name': name, 'email': email, 'auth': auth }
-    except EmailAlreadyRegistered:
-        result = { 'error': "Email already registered" }
-    except UsernameAlreadyRegistered:
-        result = { 'error': "Username already registered" }
+        result = { 'name': name, 'email': email, 'auth': auth, 'username': username }
+    except EmailAlreadyRegistered as e:
+        result = error_resp(e)
+    except UsernameAlreadyRegistered as e:
+        result = error_resp(e)
+    except BaseException:
+        result = error_resp(CouldNotRegisterUser().__str__())
     finally:
         conn.close()
         return result

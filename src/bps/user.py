@@ -1,4 +1,6 @@
 from flask import Blueprint, request, abort
+from werkzeug.exceptions import Forbidden
+from ..util.errors import InvalidRequest, CouldNotUpdateUser, CouldNotRegisterUser, error_resp
 from ..db.user import get_all_users, register_new_user, get_info, update_user_pass
 from ..db.auth import check_auth
 
@@ -13,17 +15,25 @@ def user_list():
 def user_register():
     params = request.json
 
-    name     = params["name"]
-    email    = params["email"]
-    ps       = params["password"]
-    username = params["username"]
+    try:
+        if (
+            not 'name'     in params or
+            not 'email'    in params or
+            not 'password' in params or
+            not 'username' in params
+        ):
+            raise InvalidRequest
 
-    result = register_new_user(name=name, email=email, ps=ps, username=username)
+        name     = params["name"]
+        email    = params["email"]
+        ps       = params["password"]
+        username = params["username"]
 
-    if result == None:
-        abort(500)
-
-    return result
+        result = register_new_user(name=name, email=email, ps=ps, username=username)
+        
+        return result
+    except BaseException as e:
+        return error_resp(e)
     
 @bp.route('/info', methods=['GET'])
 def user_info():
@@ -37,18 +47,26 @@ def user_info():
 
 @bp.route('/password', methods=['PUT'])
 def user_password():
-    auth     = request.headers.get("Authorization")
-    new_pass = request.json["password"]
+    auth   = request.headers.get("Authorization")
+    params = request.json
+    
+    try:
+        if not 'password' in params:
+            raise InvalidRequest
 
-    user_email = check_auth(auth)
+        new_pass = request.json["password"]
 
-    if user_email == None:
+        user = check_auth(auth)
+        if user == None:
+            raise Forbidden
+
+        user = update_user_pass(email=user["email"], new_pass=new_pass)
+
+        if user == None:
+            raise CouldNotUpdateUser
+
+        return { "auth": auth }
+    except Forbidden as e:
         abort(403)
-
-    user_email = user_email["email"]
-    user_email = update_user_pass(user_email, new_pass)
-
-    if user_email == None:
-        return { "status": False } 
-
-    return { "status": True }
+    except BaseException as e:
+        return error_resp(e)
