@@ -83,3 +83,7 @@ body {
     margin: 0px 150px 0px 0px;
     max-width: 45%;
 }
+
+.cronograma-marcado {
+    background: #fa6363;
+}
