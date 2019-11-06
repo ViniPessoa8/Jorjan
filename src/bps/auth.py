@@ -13,8 +13,9 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 @bp.route('/login', methods=['POST'])
 def login():
     params = request.json
+    
     try:
-        if not 'password' in params :
+        if params == None or not 'password' in params :
             raise InvalidRequest
 
         ps   = params['password']

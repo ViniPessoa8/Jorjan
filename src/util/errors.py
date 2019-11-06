@@ -1,6 +1,11 @@
 def error_resp(e):
     return { 'error': e.__str__() }
 
+class InvalidRequest(BaseException):
+    def __str__(self):
+        return "Requisição Inválida"
+
+# User ================================================================
 class EmailAlreadyRegistered(BaseException):
     def __str__(self):
         return "Email já registrado"
@@ -8,10 +13,6 @@ class EmailAlreadyRegistered(BaseException):
 class UsernameAlreadyRegistered(BaseException):
     def __str__(self):
         return "Username já registrado"
-
-class InvalidRequest(BaseException):
-    def __str__(self):
-        return "Requisição Inválida"
 
 class InvalidLogin(BaseException):
     def __str__(self):
@@ -24,3 +25,8 @@ class CouldNotRegisterUser(BaseException):
 class CouldNotUpdateUser(BaseException):
     def __str__(self):
         return "Não foi possível atualizar o usuário"
+
+# Product ============================================================
+class CouldNotRegisterProduct(BaseException):
+    def __str__(self):
+        return "Não foi possível registrar o produto"

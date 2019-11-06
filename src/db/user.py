@@ -4,15 +4,15 @@ from ..config.db import get_connection
 from ..util.jwt_manager import encode as jwt_encode
 from ..util.errors import EmailAlreadyRegistered, UsernameAlreadyRegistered, error_resp, CouldNotRegisterUser
 from .queries.user_queries import (
-    get_users, 
-    get_user_info,
-    get_user_by_email,
-    get_user_by_username,
-    get_user_by_email_ps, 
-    register_user, 
-    register_user_with_auth, 
-    remove_user,
-    update_pass_by_id
+    qr_get_users, 
+    qr_get_user_info,
+    qr_get_user_by_email,
+    qr_get_user_by_username,
+    qr_get_user_by_email_ps, 
+    qr_register_user, 
+    qr_register_user_with_auth, 
+    qr_remove_user,
+    qr_update_pass_by_id
 )
 
 def get_all_users():
@@ -21,7 +21,7 @@ def get_all_users():
 
     try:
         with conn.cursor() as c:
-            c.execute(get_users())
+            c.execute(qr_get_users())
             result = c.fetchall()    
     finally:
         conn.close()
@@ -32,7 +32,7 @@ def get_info(auth):
     result = {}
     try:
         with conn.cursor() as c:
-            c.execute(get_user_info(auth))
+            c.execute(qr_get_user_info(auth))
             result = c.fetchone()
 
     finally:
@@ -46,16 +46,16 @@ def register_new_user(name, ps, email, username):
 
     try:
         with conn.cursor() as c:
-            c.execute(get_user_by_email(email))
+            c.execute(qr_get_user_by_email(email))
             if c.fetchall() != ():
                 raise EmailAlreadyRegistered
 
-            c.execute(get_user_by_username(username))
+            c.execute(qr_get_user_by_username(username))
             if c.fetchall() != ():
                 raise UsernameAlreadyRegistered
                     
             auth = jwt_encode({ 'email': email, 'ps': ps })
-            c.execute(register_user_with_auth(name=name, ps=ps, email=email, auth=auth, username=username))
+            c.execute(qr_register_user_with_auth(name=name, ps=ps, email=email, auth=auth, username=username))
         conn.commit()
         
         result = { 'name': name, 'email': email, 'auth': auth, 'username': username }
@@ -76,9 +76,9 @@ def remove_user_email_ps(email, ps):
 
     try:
         with conn.cursor() as c:
-            c.execute(get_user_by_email_ps(email=email, ps=ps))
+            c.execute(qr_get_user_by_email_ps(email=email, ps=ps))
             if(c.fetchone()):
-                c.execute(remove_user(email=email,ps=ps))
+                c.execute(qr_remove_user(email=email,ps=ps))
                 result = c.fetchone()
                 conn.commit()
 
@@ -93,7 +93,7 @@ def update_user_pass(email, new_pass):
 
     try:
         with conn.cursor() as c:
-            c.execute(update_pass_by_id(email, ps))
+            c.execute(qr_update_pass_by_id(email, ps))
         conn.commit()
         result = new_pass
     finally:
