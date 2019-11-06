@@ -136,3 +136,11 @@ use Jorjan;
 	UPDATE Jorjan.sales
         SET `status` = 0
         WHERE id = 1;
+        
+-- Criar Categoria
+	INSERT INTO Jorjan.category(`name`)
+    VALUES ("Doces");
+    
+-- Remover Categoria
+	DELETE FROM Jorjan.category
+    WHERE id = ;
