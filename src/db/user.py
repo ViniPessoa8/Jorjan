@@ -183,8 +183,9 @@ def get_available_sellers():
             if (result == ()):
                 raise NoAvailableSellers
 
+        result = {'sellers':result}
     except BaseException:
         result = error_resp(NoAvailableSellers())
     finally:
         conn.close()
-        return {'sellers':result}
+        return result
