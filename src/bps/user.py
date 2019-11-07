@@ -93,7 +93,7 @@ def user_set_state():
 @bp.route('/state', methods=['GET'])
 def user_get_state():
     auth   = request.headers.get("Authorization")
-    params = request.param
+    params = request.args
 
     user = check_auth(auth)
     if user == None:

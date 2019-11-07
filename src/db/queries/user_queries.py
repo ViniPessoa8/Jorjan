@@ -48,16 +48,16 @@ def qr_get_product_owner(product_id):
 
 def qr_get_user_state_by_id(id):
     return f"""
-        SELECT 
+        SELECT state
         FROM user
         WHERE id={id};
     """
 
 def qr_get_available_sellers():
     return f"""
-        SELECT 
+        SELECT *
         FROM user
-        where id={id} AND state={USER_STATES['Seller']};
+        where state={USER_STATES['SELLER']};
     """
 
 def qr_set_user_state_by_id(id, state):

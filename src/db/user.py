@@ -130,7 +130,7 @@ def get_product_owner(product_id):
         conn.close()
         return result
     
-def get_user_state_by_id(id, state):
+def get_user_state_by_id(id):
     conn   = get_connection()
     result = None
     
@@ -160,10 +160,10 @@ def set_user_state_by_id(id, state):
                 raise CouldNotFindUserState
 
             c.execute (qr_set_user_state_by_id(id=id, state=state))
-            c.commit()
+            conn.commit()
         result = {'id':id, 'state':state}
-    except BaseException:
-        result = error_resp(CouldNotFindUserState())
+    except BaseException as e:
+        result = error_resp(e)
     finally:
         conn.close()
         return result
@@ -172,12 +172,15 @@ def get_available_sellers():
     conn   = get_connection()
     result = None
 
+    print(result)
     try:
         with conn.cursor() as c:
             c.execute(qr_get_available_sellers())
             result = c.fetchall()
+            print(result)
 
-            if result == None):
+
+            if (result == ()):
                 raise NoAvailableSellers
 
     except BaseException:
