@@ -7,10 +7,13 @@ use Jorjan;
 
 -- Cadastrar Usuário
 	INSERT INTO Jorjan.`user`(email, username, `password`, `name`, state, picture, avaliation, auth)
-	VALUES ('gustavo@gmail.com','gusta_braga',SHA('espinafre2000'),'Grustavo Braga Mota',0,NULL,NULL,NULL);
+	VALUES ('gustavo@gmail.com','gusta_braga',SHA('123'),'Grustavo Braga Mota',0,NULL,NULL,NULL);
 
 	INSERT INTO Jorjan.`user` (email, username, `password`, `name`, state, picture, avaliation, auth)
-	VALUES ('ana@gmail.com','aninha0660',SHA('espinafre2000'),'Ana Beatriz de Souza',0,NULL,NULL,NULL);
+	VALUES ('ana@gmail.com','aninha0660',SHA('123'),'Ana Beatriz de Souza',0,NULL,NULL,NULL);
+    
+    INSERT INTO Jorjan.`user` (email, username, `password`, `name`, state, picture, avaliation, auth)
+	VALUES ('vcbp.snf18@uea.edu.br','ViniPessoa8',SHA('123'),'Vinícius Cavalcante de Brito Pessoa',0,NULL,NULL,NULL);
 
 -- Realizar Login
 	SELECT *
@@ -19,7 +22,7 @@ use Jorjan;
 
 -- Cadastrar Produto
 	INSERT INTO Jorjan.product(name, description, price, stock, category, owner_id)
-	VALUES ('Brigadeiro', 'Bolinhas de chocolate.', 2.00, 20, 'Doces', 1);
+	VALUES ('Brigadeiro', 'Bolinhas de chocolate.', 2.00, 20, 1, 1);
 
 -- STATUS DO PEDIDO
 	-- 0 -> CANCELADO
@@ -29,8 +32,8 @@ use Jorjan;
     -- 4 -> FINALIZADO 
 
 -- Adicionar Item Carrinho
-	INSERT INTO Jorjan.sales(`date`, buyer_id, seller_id, observation, delivery, `status`)
-	VALUES (DATE '2019-11-02', 2, 1, NULL, FALSE, 1);
+	INSERT INTO Jorjan.sales(`date`, buyer_id, seller_id, observation, `status`)
+	VALUES (DATE '2019-11-02', 2, 1, NULL, 1);
     
     -- Registra os produtos e suas respectivas quantidades
         INSERT INTO Jorjan.sales_has_product(sales_id, product_id, quantity)
