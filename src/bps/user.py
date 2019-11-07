@@ -82,7 +82,7 @@ def user_set_state():
         if( 'id'    in params and
             'state' in params
             ):
-            id = params['id']
+            id = user['id']
             state = params['state']
             return set_user_state_by_id(id=id, state=state)
         else:
