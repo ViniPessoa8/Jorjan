@@ -101,7 +101,7 @@ def user_get_state():
 
     try:
         if 'id' in params:
-            id = params['id']
+            id = user['id']
             return get_user_state_by_id(id=id)
         else:
             raise InvalidRequest
