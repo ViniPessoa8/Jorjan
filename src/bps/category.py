@@ -12,7 +12,7 @@ from ..db.category import (
 
 bp = Blueprint('category', __name__, url_prefix='/category')
 
-@bp.route('/register', methods=['POST'])
+@bp.route('/new', methods=['POST'])
 def category_register():
     params = request.json
     auth   = request.headers.get('Authorization')
