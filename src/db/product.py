@@ -1,7 +1,8 @@
 from ..config.db import get_connection
 from ..util.errors import error_resp, CouldNotRegisterProduct
 from .queries.product_queries import (
-    qr_register_product
+    qr_register_product,
+    qr_get_products
 )
 
 def register_new_product(product, owner_id):
@@ -20,6 +21,22 @@ def register_new_product(product, owner_id):
             'price': product['price'], 
             'stock': product['stock'] 
         }
+    except BaseException:
+        result = error_resp(CouldNotRegisterProduct())
+    finally:
+        conn.close()
+        return result
+
+def get_products():
+    conn   = get_connection()
+    result = None
+
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_get_products())
+            products = c.fetchall()
+
+        result = { 'products': products }
     except BaseException:
         result = error_resp(CouldNotRegisterProduct())
     finally:

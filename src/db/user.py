@@ -2,7 +2,14 @@ import sys
 from hashlib import sha1
 from ..config.db import get_connection
 from ..util.jwt_manager import encode as jwt_encode
-from ..util.errors import EmailAlreadyRegistered, UsernameAlreadyRegistered, error_resp, CouldNotRegisterUser
+from ..util.errors import (
+    EmailAlreadyRegistered, 
+    UsernameAlreadyRegistered, 
+    error_resp, 
+    CouldNotRegisterUser,
+    CouldNotFindProductOwner
+)
+
 from .queries.user_queries import (
     qr_get_users, 
     qr_get_user_info,
@@ -104,10 +111,17 @@ def update_user_pass(email, new_pass):
 def get_product_owner(product_id):
     conn   = get_connection()
     result = None
-
-    with conn.cursor() as c:
-        c.execute(qr_get_product_owner(product_id))
-        result = c.fetchone()
-    conn.close()
-    return result
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_get_product_owner(product_id))
+            result = c.fetchone()
+        
+        if result == None:
+            raise CouldNotFindProductOwner
+        
+    except BaseException as e:
+        result = error_resp(CouldNotFindProductOwner())
+    finally:
+        conn.close()
+        return result
     
