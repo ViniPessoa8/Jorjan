@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `Jorjan`.`user` (
   `email` VARCHAR(100) NOT NULL,
   `username` VARCHAR(20) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
-  `state` BIT NOT NULL,
+  `state` TINYINT NOT NULL,
   `picture` VARCHAR(255) NULL,
   `avaliation` FLOAT(1) NULL,
   `auth` VARCHAR(500) NULL,

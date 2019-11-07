@@ -104,14 +104,10 @@ def user_set_state():
         abort(403)
 
     try:
-        if( 'id'    in params and
-            'state' in params
-            ):
-            id = user['id']
-            state = user['state']
-            return set_user_state_by_id(id=id, state=state)
-        else:
+        if not 'state' in params:
             raise InvalidRequest
+
+        return set_user_state_by_id(id=user['id'], state=params['state'])
     except InvalidRequest as e:
         return error_resp(e)
 
@@ -124,14 +120,7 @@ def user_get_state():
     if user == None:
         abort(403)
 
-    try:
-        if 'id' in params:
-            id = user['id']
-            return get_user_state_by_id(id=id)
-        else:
-            raise InvalidRequest
-    except InvalidRequest as e:
-        return error_resp(e)
+    return get_user_state_by_id(id=user['id'])
     
 @bp.route('/sellers', methods=['GET'])
 def user_get_available_sellers():
