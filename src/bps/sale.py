@@ -1,9 +1,12 @@
 from flask import Blueprint, request, abort
 from ..util.constants import SALE_STATES
-from ..util.errors import error_resp, InvalidRequest, CouldNotFindProductOwner
+from ..util.errors import error_resp, InvalidRequest, CouldNotFindProductOwner, ProductOutOfStock
 from ..db.auth import check_auth
 from ..db.user import get_product_owner
+from ..db.product import get_product_id, update_product_stock
 from ..db.sale import (
+    get_cart_product,
+    update_product_cart,
     check_cart_exists,
     get_buyer_sale_info,
     check_sale_exists_seller,
@@ -35,16 +38,50 @@ def add_to_cart():
         ):
             raise InvalidRequest
         
-        cart = check_cart_exists(buyer_id=buyer['id'])
+        cart           = check_cart_exists(buyer_id=buyer['id'])
+        product_result = get_product_id(params['product_id'])
+
+        if product_result == None:
+            raise InvalidRequest
+        elif 'error' in product_result:
+            return product_result
+
+        old_quantity = product_result['stock']
 
         if cart != None:
-            result = add_product_cart(product_id=params['product_id'], quantity=params['quantity'], cart_id=cart['id'])
+            cart_product = get_cart_product(product_id=params['product_id'], cart_id=cart['id'])
+            if cart_product == None:
+                if params['quantity'] > product_result['stock']:
+                    raise ProductOutOfStock
+                
+                new_stock = product_result['stock'] - params['quantity']
+                result = update_product_stock(product_id=params['product_id'], quantity=new_stock)
+                if 'error' in result:
+                    return result
+                    
+                result = add_product_cart(product_id=params['product_id'], quantity=params['quantity'], cart_id=cart['id'])
+            else:
+                new_stock = product_result['stock'] + (cart_product['quantity'] - params['quantity'])
+                if new_stock < 0:
+                    raise ProductOutOfStock
+
+                result = update_product_stock(product_id=params['product_id'], quantity=new_stock)
+                result = update_product_cart(product_id=params['product_id'], quantity=params['quantity'], cart_id=cart['id'])
         else:
             seller = get_product_owner(product_id=params['product_id'])
             if 'error' in seller:
                 raise CouldNotFindProductOwner
             
+            new_stock = product_result['stock'] - params['quantity']
+            result = update_product_stock(product_id=params['product_id'], quantity=new_stock)
+            if 'error' in result:
+                update_product_stock(product_id=params['product_id'], quantity=old_quantity)
+                return result
+            
             result = add_product_new_cart(buyer_id=buyer['id'], product_id=params['product_id'], quantity=params['quantity'], seller_id=seller['id'])
+
+        if 'error' in result:
+            update_product_stock(product_id=params['product_id'], quantity=old_quantity)
 
         return result
     except BaseException as e:

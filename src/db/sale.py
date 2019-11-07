@@ -51,19 +51,28 @@ def check_cart_exists(buyer_id):
         conn.close()
         return result
 
-def add_product_cart(product_id, quantity, cart_id):
+def get_cart_product(product_id, cart_id):
     conn   = get_connection()
     result = None
 
     try:
         with conn.cursor() as c:
             c.execute(qr_get_sale_product(product_id=product_id, cart_id=cart_id))
-            product = c.fetchone()
+            result = c.fetchone()
+        return result
+    except BaseException:
+        result = error_resp(CouldNotAddToCart())
+    finally:
+        conn.close()
+        return result
 
-            if product == None:
-                c.execute(qr_add_to_cart(product_id=product_id, quantity=quantity, cart_id=cart_id))
-            else:
-                c.execute(qr_update_sale_product(product_id=product_id, quantity=quantity, cart_id=cart_id))
+def add_product_cart(product_id, quantity, cart_id):
+    conn   = get_connection()
+    result = None
+
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_add_to_cart(product_id=product_id, quantity=quantity, cart_id=cart_id))
         conn.commit()
 
         result = {
@@ -75,6 +84,26 @@ def add_product_cart(product_id, quantity, cart_id):
     finally:
         conn.close()
         return result
+
+def update_product_cart(product_id, quantity, cart_id):
+    conn   = get_connection()
+    result = None
+
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_update_sale_product(product_id=product_id, quantity=quantity, cart_id=cart_id))
+        conn.commit()
+
+        result = {
+            'product_id': product_id,
+            'quantity': quantity
+        }
+    except BaseException:
+        result = error_resp(CouldNotAddToCart())
+    finally:
+        conn.close()
+        return result
+
 
 def add_product_new_cart(buyer_id, product_id, quantity, seller_id):
     conn   = get_connection()

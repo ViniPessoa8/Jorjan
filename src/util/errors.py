@@ -47,6 +47,22 @@ class CouldNotRegisterProduct(BaseException):
     def __str__(self):
         return "Não foi possível registrar o produto"
 
+class CouldNotListProducts(BaseException):
+    def __str__(self):
+        return "Não foi possível listar os produtos"
+
+class CouldNotGetProduct(BaseException):
+    def __str__(self):
+        return "Não foi possível achar o produto"
+
+class ProductOutOfStock(BaseException):
+    def __str__(self):
+        return "O produto não se encontra mais em estoque"
+
+class CouldNotUpdateProduct(BaseException):
+    def __str__(self):
+        return "Não foi possível atualizar o produto"
+
 # Category ============================================================
 class CategoryNotFound(BaseException):
     def __str__(self):
