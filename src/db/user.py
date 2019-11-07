@@ -9,6 +9,7 @@ from .queries.user_queries import (
     qr_get_user_by_email,
     qr_get_user_by_username,
     qr_get_user_by_email_ps, 
+    qr_get_product_owner,
     qr_register_user, 
     qr_register_user_with_auth, 
     qr_remove_user,
@@ -64,7 +65,7 @@ def register_new_user(name, ps, email, username):
     except UsernameAlreadyRegistered as e:
         result = error_resp(e)
     except BaseException:
-        result = error_resp(CouldNotRegisterUser().__str__())
+        result = error_resp(CouldNotRegisterUser())
     finally:
         conn.close()
         return result
@@ -99,3 +100,14 @@ def update_user_pass(email, new_pass):
     finally:
         conn.close()
         return result
+
+def get_product_owner(product_id):
+    conn   = get_connection()
+    result = None
+
+    with conn.cursor() as c:
+        c.execute(qr_get_product_owner(product_id))
+        result = c.fetchone()
+    conn.close()
+    return result
+    

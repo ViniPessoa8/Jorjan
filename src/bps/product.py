@@ -19,11 +19,11 @@ def product_register():
     try:
         if (
             params == None or
-            not 'name' in params or
+            not 'name'        in params or
             not 'description' in params or
             not 'category_id' in params or
-            not 'price' in params or
-            not 'stock' in params
+            not 'price'       in params or
+            not 'stock'       in params
         ):
             raise InvalidRequest
             

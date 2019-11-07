@@ -21,7 +21,7 @@ def register_new_product(product, owner_id):
             'stock': product['stock'] 
         }
     except BaseException:
-        result = error_resp(CouldNotRegisterProduct().__str__())
+        result = error_resp(CouldNotRegisterProduct())
     finally:
         conn.close()
         return result
