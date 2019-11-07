@@ -1,9 +1,13 @@
 from ..config.db import get_connection
-from ..util.errors import error_resp, CouldNotAddToCart, CouldNotStartCart
+from ..util.errors import error_resp, CouldNotAddToCart, CouldNotStartCart, CouldNotChangeSaleStatus
 from .queries.sale_queries import (
     qr_check_cart_exists,
     qr_add_to_cart,
-    qr_create_cart
+    qr_create_cart,
+    qr_get_sale_by_buyer,
+    qr_get_sale_product,
+    qr_update_sale_product,
+    qr_update_sale_info
 )
 
 def check_cart_exists(buyer_id):
@@ -23,7 +27,13 @@ def add_product_cart(product_id, quantity, cart_id):
 
     try:
         with conn.cursor() as c:
-            c.execute(qr_add_to_cart(product_id=product_id, quantity=quantity, cart_id=cart_id))
+            c.execute(qr_get_sale_product(product_id=product_id, cart_id=cart_id))
+            product = c.fetchone()
+
+            if product == None:
+                c.execute(qr_add_to_cart(product_id=product_id, quantity=quantity, cart_id=cart_id))
+            else:
+                c.execute(qr_update_sale_product(product_id=product_id, quantity=quantity, cart_id=cart_id))
         conn.commit()
 
         result = {
@@ -65,3 +75,32 @@ def add_product_new_cart(buyer_id, product_id, quantity, seller_id):
         conn.close()
         return result
         
+def get_sale_by_buyer(buyer_id):
+    conn = get_connection()
+    result = None
+
+    with conn.cursor() as c:
+        c.execute(qr_get_sale_by_buyer(buyer_id))
+        result = c.fetchone()
+
+        conn.close()
+        return result
+
+def update_sale_info(sale_id, status):
+    conn = get_connection()
+    result = None
+
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_update_sale_info(sale_id=sale_id, status=status))
+        conn.commit()
+
+        result = {
+            'sale_id': sale_id,
+            'status': status
+        }
+    except BaseException:
+        result = error_resp(CouldNotChangeSaleStatus())
+    finally:
+        conn.close()
+        return result

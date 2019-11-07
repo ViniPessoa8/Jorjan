@@ -26,6 +26,9 @@ class CouldNotUpdateUser(BaseException):
     def __str__(self):
         return "Não foi possível atualizar o usuário"
 
+class CouldNotFindProductOwner(BaseException):
+    def __str__(self):
+        return "Não foi possível encontrar o produto ou o dono do mesmo"
 # Product ============================================================
 class CouldNotRegisterProduct(BaseException):
     def __str__(self):
@@ -39,3 +42,7 @@ class CouldNotStartCart(BaseException):
 class CouldNotAddToCart(BaseException):
     def __str__(self):
         return "Não foi possível adicionar produto ao carrinho"
+
+class CouldNotChangeSaleStatus(BaseException):
+    def __str__(self):
+        return "Não foi possível alterar sua compra"
