@@ -30,6 +30,10 @@ class CouldNotFindProductOwner(BaseException):
     def __str__(self):
         return "Não foi possível encontrar o produto ou o dono do mesmo"
 
+class CouldNotGetUserHistory(BaseException):
+    def __str__(self):
+        return "Não foi possível pesquisar o histórico do usuário"
+
 class CouldNotFindUserState(BaseException):
     def __str__(self):
         return "Não foi possível encontrar o estado do usuário"
@@ -58,6 +62,10 @@ class EmptyCategoryTable(BaseException):
 
         
 # Sales ==============================================================
+class CouldNotGetSaleInfo(BaseException):
+    def __str__(self):
+        return "Não foi possível conseguir informação sobre a venda"
+
 class CouldNotStartCart(BaseException):
     def __str__(self):
         return "Não foi possível iniciar o carrinho"
@@ -73,3 +81,7 @@ class CouldNotChangeSaleStatus(BaseException):
 class CouldNotRemoveCartItem(BaseException):
     def __str__(self):
         return "Não foi possível remover item do carrinho"
+
+class CouldNotCheckSaleSellerExists(BaseException):
+    def __str__(self):
+        return "Não foi possível encontrar o vendedor desta compra"

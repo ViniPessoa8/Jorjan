@@ -1,6 +1,20 @@
 from flask import Blueprint, request, abort
 from ..util.errors import InvalidRequest, CouldNotUpdateUser, CouldNotRegisterUser, error_resp
-from ..db.user import get_all_users, register_new_user, get_info, update_user_pass, get_available_sellers, get_user_state_by_id, set_user_state_by_id
+
+from ..db.user import 
+
+from ..db.user import (
+    get_all_users, 
+    register_new_user, 
+    get_info, 
+    update_user_pass, 
+    get_history,
+    get_available_sellers, 
+    get_user_state_by_id, 
+    set_user_state_by_id
+)
+
+
 from ..db.auth import check_auth
 
 bp = Blueprint('user', __name__, url_prefix='/user')
@@ -68,6 +82,17 @@ def user_password():
         return { "auth": auth }
     except BaseException as e:
         return error_resp(e)
+
+@bp.route('/history', methods=['GET'])
+def get_user_history():
+    auth   = request.headers.get("Authorization")
+    
+    user = check_auth(auth)
+    if user == None:
+        abort(403)
+    
+    result = get_history(user_id=user['id'])
+    return result
 
 @bp.route('/state', methods=['PUT'])
 def user_set_state():
