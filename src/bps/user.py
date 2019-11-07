@@ -9,7 +9,9 @@ from ..db.user import (
     get_history,
     get_available_sellers, 
     get_user_state_by_id, 
-    set_user_state_by_id
+    set_user_state_by_id,
+    update_user_profile,
+    get_user_by_id
 )
 
 
@@ -140,5 +142,33 @@ def user_get_available_sellers():
         abort(403)
     try:
         return get_available_sellers()
+    except BaseException as e:
+        return error_resp(e)
+
+@bp.route('/update', methods=['PUT'])
+def user_update_profile():
+    auth = request.headers.get("Authorization")
+    params = request.json
+
+    user = check_auth(auth)
+    if user == None:
+        abort(403)
+
+    id = user['id']
+    user = get_user_by_id(id)
+
+    name = user['name']
+    username = user['username']
+    password = user['password']
+
+    try:
+        if 'name' in params:
+            name = params['name']
+        if 'username' in params:
+            username = params['username']
+        if 'password' in params:
+            password = params['password']
+
+        return update_user_profile(id, name, username, password)
     except BaseException as e:
         return error_resp(e)
