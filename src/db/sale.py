@@ -1,4 +1,5 @@
 from ..config.db import get_connection
+from ..util.constants import SALE_STATES
 from ..util.errors import (
     error_resp, 
     CouldNotAddToCart,
@@ -15,7 +16,7 @@ from .queries.sale_queries import (
     qr_get_sale_by_buyer,
     qr_get_sale_product,
     qr_update_sale_product,
-    qr_update_sale_info,
+    qr_update_sale_status,
     qr_remove_product_from_cart
 )
 
@@ -94,13 +95,13 @@ def get_sale_by_buyer(buyer_id, status):
         conn.close()
         return result
 
-def update_sale_info(sale_id, status):
+def update_sale_status(sale_id, status):
     conn = get_connection()
     result = None
 
     try:
         with conn.cursor() as c:
-            c.execute(qr_update_sale_info(sale_id=sale_id, status=status))
+            c.execute(qr_update_sale_status(sale_id=sale_id, status=status))
         conn.commit()
 
         result = {
@@ -120,12 +121,18 @@ def remove_product_from_cart(product_id, cart_id):
     try:
         with conn.cursor() as c:
             c.execute(qr_remove_product_from_cart(product_id=product_id, cart_id=cart_id))
-        conn.commit()
+            conn.commit()
+
+            cart = get_cart_info(cart_id)
+            if cart == ():
+                c.excute(qr_update_sale_status(sale_id=cart_id, status=SALE_STATES['CANCELED']))
+                conn.commit()
 
         result = { 'product_id': product_id }
     except BaseException:
-        error_resp(CouldNotRemoveCartItem())
+        result = error_resp(CouldNotRemoveCartItem())
     finally:
+        print(result)
         conn.close()
         return result
 

@@ -9,7 +9,7 @@ from ..db.sale import (
     add_product_cart,
     add_product_new_cart,
     get_sale_by_buyer,
-    update_sale_info,
+    update_sale_status,
     get_cart_info,
     remove_product_from_cart
 )
@@ -106,7 +106,7 @@ def request_sale():
         if sale == None:
             raise InvalidRequest
         
-        result = update_sale_info(sale_id=sale['id'], status=SALE_STATES['WAITING_CONFIRMATION'])
+        result = update_sale_status(sale_id=sale['id'], status=SALE_STATES['WAITING_CONFIRMATION'])
 
         return result
     except BaseException as e:
@@ -130,7 +130,7 @@ def confirm_request():
         if sale == None or sale['status'] != SALE_STATES['WAITING_CONFIRMATION']:
             raise InvalidRequest
 
-        result = update_sale_info(sale_id=sale['id'], status=SALE_STATES['WAITING_DELIVERY'])
+        result = update_sale_status(sale_id=sale['id'], status=SALE_STATES['WAITING_DELIVERY'])
     
         return result
     except BaseException as e:
@@ -154,7 +154,7 @@ def confirm_delivery():
         if sale == None or sale['status'] != SALE_STATES['WAITING_DELIVERY']:
             raise InvalidRequest
 
-        result = update_sale_info(sale_id=sale['id'], status=SALE_STATES['FINISHED'])
+        result = update_sale_status(sale_id=sale['id'], status=SALE_STATES['FINISHED'])
     
         return result
     except BaseException as e:
