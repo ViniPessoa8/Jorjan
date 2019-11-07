@@ -104,7 +104,23 @@ def remove_from_cart():
         cart = check_cart_exists(buyer_id=user['id'])
         if cart == None:
             raise InvalidRequest
+        
+        product_result = get_product_id(params['product_id'])
+        if product_result == None:
+            raise InvalidRequest
+        elif 'error' in product_result:
+            return product_result
 
+        cart_product = get_cart_product(product_id=params['product_id'], cart_id=cart['id'])
+        if cart_product == None:
+            raise InvalidRequest
+
+        new_stock = product_result['stock'] + cart_product['quantity']
+        result = update_product_stock(product_id=params['product_id'], quantity=new_stock)
+        if 'error' in result:
+            return result
+        
+        cart_product['quantity']
         result = remove_product_from_cart(product_id=params['product_id'], cart_id=cart['id'])
     
         return result

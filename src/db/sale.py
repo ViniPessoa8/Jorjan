@@ -174,11 +174,12 @@ def remove_product_from_cart(product_id, cart_id):
 
             cart = get_cart_info(cart_id)
             if cart == ():
-                c.excute(qr_update_sale_status(sale_id=cart_id, status=SALE_STATES['CANCELED']))
+                c.execute(qr_update_sale_status(sale_id=cart_id, status=SALE_STATES['CANCELED']))
                 conn.commit()
 
         result = { 'product_id': product_id }
-    except BaseException:
+    except BaseException as e:
+        print(e)
         result = error_resp(CouldNotRemoveCartItem())
     finally:
         conn.close()
