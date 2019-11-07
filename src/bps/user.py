@@ -13,10 +13,7 @@ def user_list():
 @bp.route('/register', methods=['POST'])
 def user_register():
     params = request.json
-
-    if params == None:
-        abort(403)
-
+    
     try:
         if (
             params == None or
