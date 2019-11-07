@@ -1,5 +1,6 @@
 from flask import Blueprint, request, abort
 from ..util.errors import error_resp, InvalidRequest
+from ..db.auth import check_auth
 from ..db.category import (
     register_category,
     get_categories,
@@ -13,8 +14,11 @@ bp = Blueprint('category', __name__, url_prefix='/category')
 @bp.route('/register', methods=['POST'])
 def category_register():
     params = request.json
-
-    if params == None:
+    auth   = request.headers.get('Authorization')
+    result = None
+    
+    buyer = check_auth(auth)  
+    if buyer == None:
         abort(403)
 
     try:
@@ -26,7 +30,7 @@ def category_register():
 
         name = params["name"]
         result = register_category(name=name)
-        
+
         return result
     except BaseException as e:
         return error_resp(e)
@@ -34,6 +38,12 @@ def category_register():
 @bp.route('/get', methods=['GET'])
 def category_list():
     params = request.json
+    auth   = request.headers.get('Authorization')
+    result = None
+    
+    buyer = check_auth(auth)  
+    if buyer == None:
+        abort(403)
 
     try:
         if ( params != None and  (
@@ -61,8 +71,10 @@ def category_list():
 @bp.route('/remove', methods=['POST'])
 def category_remove():
     params = request.json
-
-    if params == None:
+    auth   = request.headers.get('Authorization')
+    
+    buyer = check_auth(auth)  
+    if buyer == None:
         abort(403)
 
     try:
