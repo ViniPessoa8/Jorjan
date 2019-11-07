@@ -51,7 +51,6 @@ def category_list():
     try:
         if ('id' in params):
             id = params["id"]
-            print("ID = ", id)
             result = get_category_by_id(id=id)
 
         elif ('name' in params):
