@@ -11,12 +11,14 @@ from ..util.errors import (
     CouldNotRegisterUser,
     CouldNotFindProductOwner,
     CouldNotFindUserState,
-    NoAvailableSellers
+    NoAvailableSellers,
+    CouldNotFindUser
 )
 
 from .queries.user_queries import (
     qr_get_users, 
     qr_get_user_info,
+    qr_get_user_by_id,
     qr_get_user_by_email,
     qr_get_user_by_username,
     qr_get_user_by_email_ps, 
@@ -28,7 +30,8 @@ from .queries.user_queries import (
     qr_update_pass_by_id,
     qr_get_user_state_by_id,
     qr_set_user_state_by_id,
-    qr_get_available_sellers
+    qr_get_available_sellers,
+    qr_update_user_profile
 )
 
 def get_all_users():
@@ -192,13 +195,10 @@ def get_available_sellers():
     conn   = get_connection()
     result = None
 
-    print(result)
     try:
         with conn.cursor() as c:
             c.execute(qr_get_available_sellers())
             result = c.fetchall()
-            print(result)
-
 
             if (result == ()):
                 raise NoAvailableSellers
@@ -206,6 +206,52 @@ def get_available_sellers():
         result = {'sellers':result}
     except BaseException:
         result = error_resp(NoAvailableSellers())
+    finally:
+        conn.close()
+        return result
+
+def update_user_profile(id, name, username, password):
+    ps = sha1(password.encode('utf-8')).hexdigest()
+    conn = get_connection()
+    result = None
+
+    try:
+        with conn.cursor() as c:
+            # Checks if user exists
+            result = get_user_by_id(id=id)
+            if result == None:
+                raise CouldNotFindUser
+                
+            # Updates
+            c.execute(qr_update_user_profile(id, name, username, ps))
+        conn.commit()
+        
+        result = {
+            "id":id,
+            "name":name,
+            "username":username,
+            "password":ps
+        }
+    except BaseException as e:
+        result = error_resp(e)
+    finally:
+        conn.close()
+        return result
+
+def get_user_by_id(id):
+    conn   = get_connection()
+    result = None
+    
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_get_user_by_id(id=id))
+            result = c.fetchone()
+        
+        if result == None:
+            raise CouldNotFindUserState
+        
+    except BaseException:
+        result = error_resp(CouldNotFindUserState())
     finally:
         conn.close()
         return result

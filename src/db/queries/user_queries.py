@@ -9,6 +9,9 @@ def qr_logout(user_email):
 def qr_get_user_info(auth):
     return "SELECT name, email, username FROM user WHERE auth='%s';" % (auth)
 
+def qr_get_user_by_id(id):
+    return "SELECT name, email, auth, id, username, password FROM user WHERE id='%s'" % (id)
+
 def qr_get_user_by_email(email):
     return "SELECT name, email, auth, id, username FROM user WHERE email='%s'" % (email)
 
@@ -81,5 +84,12 @@ def qr_set_user_state_by_id(id, state):
     return f"""
         UPDATE user
         SET state={state}
+        WHERE id={id};
+    """
+
+def qr_update_user_profile(id, name, username, password):
+    return f"""
+        UPDATE user
+        SET name=\"{name}\", username=\"{username}\", password=\"{password}\"
         WHERE id={id};
     """
