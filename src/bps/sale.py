@@ -5,6 +5,7 @@ from ..db.auth import check_auth
 from ..db.user import get_product_owner
 from ..db.sale import (
     check_cart_exists,
+    get_buyer_sale_info,
     check_sale_exists_seller,
     add_product_cart,
     add_product_new_cart,
@@ -156,6 +157,35 @@ def confirm_delivery():
 
         result = update_sale_status(sale_id=sale['id'], status=SALE_STATES['FINISHED'])
     
+        return result
+    except BaseException as e:
+        return error_resp(e)
+
+@bp.route('/cancel_request', methods=['DELETE'])
+def cancel_request():
+    auth = request.headers.get('Authorization')
+    params = request.args
+    
+    user = check_auth(auth)
+    if user == None:
+        abort(403)
+
+    try:
+        if params == None or not 'sale_id' in params:
+            raise InvalidRequest
+        
+        sale = get_buyer_sale_info(sale_id=params['sale_id'], buyer_id=user['id'])
+    
+        if (
+            sale == None or not (
+                sale['status'] <= SALE_STATES['WAITING_CONFIRMATION'] and 
+                sale['status'] >= SALE_STATES['CART']
+            )
+        ):
+            raise InvalidRequest
+        
+        result = update_sale_status(sale_id=sale['id'], status=SALE_STATES['CANCELED'])
+
         return result
     except BaseException as e:
         return error_resp(e)

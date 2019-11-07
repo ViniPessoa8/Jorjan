@@ -6,6 +6,7 @@ from ..util.errors import (
     CouldNotStartCart, 
     CouldNotChangeSaleStatus,
     CouldNotCheckSaleSellerExists,
+    CouldNotGetSaleInfo,
     CouldNotRemoveCartItem
 )
 from .queries.sale_queries import (
@@ -15,20 +16,38 @@ from .queries.sale_queries import (
     qr_create_cart,
     qr_get_cart_info,
     qr_get_sale_by_buyer,
+    qr_get_buyer_sale_info,
     qr_get_sale_product,
     qr_update_sale_product,
     qr_update_sale_status,
     qr_remove_product_from_cart
 )
 
+def get_buyer_sale_info(sale_id, buyer_id):
+    conn   = get_connection()
+    result = None
+
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_get_buyer_sale_info(sale_id=sale_id, buyer_id=buyer_id))
+            result = c.fetchone()
+    except BaseException:
+        result = error_resp(CouldNotGetSaleInfo())
+    finally:
+        conn.close()
+        return result
+
 def check_cart_exists(buyer_id):
     conn   = get_connection()
     result = None
 
-    with conn.cursor() as c:
-        c.execute(qr_check_cart_exists(buyer_id))
-        result = c.fetchone()
-
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_check_cart_exists(buyer_id))
+            result = c.fetchone()
+    except BaseException:
+        result = error_resp(CouldNotGetSaleInfo())
+    finally:
         conn.close()
         return result
 

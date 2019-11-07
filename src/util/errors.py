@@ -39,6 +39,10 @@ class CouldNotRegisterProduct(BaseException):
         return "Não foi possível registrar o produto"
 
 # Sales ==============================================================
+class CouldNotGetSaleInfo(BaseException):
+    def __str__(self):
+        return "Não foi possível conseguir informação sobre a venda"
+
 class CouldNotStartCart(BaseException):
     def __str__(self):
         return "Não foi possível iniciar o carrinho"

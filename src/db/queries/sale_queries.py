@@ -1,6 +1,9 @@
 from datetime import date
 from ...util.constants import SALE_STATES
 
+def qr_get_buyer_sale_info(sale_id, buyer_id):
+    return f"SELECT * FROM sales WHERE (id={sale_id} and buyer_id={buyer_id});"
+
 def qr_check_cart_exists(buyer_id):
     return f"SELECT * FROM sales WHERE (buyer_id='{buyer_id}' and status={SALE_STATES['CART']})"
 
