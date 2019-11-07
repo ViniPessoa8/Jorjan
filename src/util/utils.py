@@ -20,3 +20,4 @@ def format_history_result(result):
     } for key, group in groupby(result, key=grouper)]
 
     return history
+    
