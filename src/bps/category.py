@@ -62,7 +62,6 @@ def category_list():
 
         else:  
             result = get_categories()      
-            print(result)
     except InvalidRequest:
         return error_resp(e)
     except BaseException as e:
