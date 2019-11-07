@@ -83,7 +83,7 @@ def user_set_state():
             'state' in params
             ):
             id = user['id']
-            state = params['state']
+            state = user['state']
             return set_user_state_by_id(id=id, state=state)
         else:
             raise InvalidRequest
