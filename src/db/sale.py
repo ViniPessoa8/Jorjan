@@ -5,6 +5,7 @@ from ..util.errors import (
     CouldNotAddToCart,
     CouldNotStartCart, 
     CouldNotChangeSaleStatus,
+    CouldNotCheckSaleSellerExists,
     CouldNotRemoveCartItem
 )
 from .queries.sale_queries import (
@@ -21,7 +22,7 @@ from .queries.sale_queries import (
 )
 
 def check_cart_exists(buyer_id):
-    conn = get_connection()
+    conn   = get_connection()
     result = None
 
     with conn.cursor() as c:
@@ -32,7 +33,7 @@ def check_cart_exists(buyer_id):
         return result
 
 def add_product_cart(product_id, quantity, cart_id):
-    conn = get_connection()
+    conn   = get_connection()
     result = None
 
     try:
@@ -57,7 +58,7 @@ def add_product_cart(product_id, quantity, cart_id):
         return result
 
 def add_product_new_cart(buyer_id, product_id, quantity, seller_id):
-    conn = get_connection()
+    conn   = get_connection()
     result = None
 
     try:
@@ -85,7 +86,7 @@ def add_product_new_cart(buyer_id, product_id, quantity, seller_id):
         return result
         
 def get_sale_by_buyer(buyer_id, status):
-    conn = get_connection()
+    conn   = get_connection()
     result = None
 
     with conn.cursor() as c:
@@ -96,7 +97,7 @@ def get_sale_by_buyer(buyer_id, status):
         return result
 
 def update_sale_status(sale_id, status):
-    conn = get_connection()
+    conn   = get_connection()
     result = None
 
     try:
@@ -115,7 +116,7 @@ def update_sale_status(sale_id, status):
         return result
 
 def remove_product_from_cart(product_id, cart_id):
-    conn = get_connection()
+    conn   = get_connection()
     result = None
 
     try:
@@ -137,7 +138,7 @@ def remove_product_from_cart(product_id, cart_id):
         return result
 
 def get_cart_info(cart_id):
-    conn = get_connection()
+    conn   = get_connection()
     result = None
 
     try:
@@ -170,12 +171,15 @@ def get_cart_info(cart_id):
         return result
 
 def check_sale_exists_seller(seller_id, sale_id):
-    conn = get_connection()
+    conn   = get_connection()
     result = None
 
-    with conn.cursor() as c:
-        c.execute(qr_check_sale_exists_seller(seller_id=seller_id, sale_id=sale_id))
-        result = c.fetchone()
-
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_check_sale_exists_seller(seller_id=seller_id, sale_id=sale_id))
+            result = c.fetchone()
+    except BaseException:
+        result = error_resp(CouldNotCheckSaleSellerExists())
+    finally:
         conn.close()
         return result

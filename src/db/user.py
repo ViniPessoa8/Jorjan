@@ -1,11 +1,13 @@
 import sys
 from hashlib import sha1
 from ..config.db import get_connection
+from ..util.utils import format_history_result
 from ..util.jwt_manager import encode as jwt_encode
 from ..util.errors import (
-    EmailAlreadyRegistered, 
-    UsernameAlreadyRegistered, 
     error_resp, 
+    EmailAlreadyRegistered, 
+    CouldNotGetUserHistory,
+    UsernameAlreadyRegistered, 
     CouldNotRegisterUser,
     CouldNotFindProductOwner
 )
@@ -17,7 +19,8 @@ from .queries.user_queries import (
     qr_get_user_by_username,
     qr_get_user_by_email_ps, 
     qr_get_product_owner,
-    qr_register_user, 
+    qr_register_user,
+    qr_get_history,
     qr_register_user_with_auth, 
     qr_remove_user,
     qr_update_pass_by_id
@@ -125,3 +128,22 @@ def get_product_owner(product_id):
         conn.close()
         return result
     
+def get_history(user_id):
+    conn   = get_connection()
+    result = None
+
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_get_history(user_id=user_id))
+            result = c.fetchall()
+
+        if result == ():
+            result = { 'history': [] }
+        else:
+            history = format_history_result(result)
+            result = { 'history':  history}
+    except BaseException:
+        result = error_resp(CouldNotGetUserHistory())
+    finally:
+        conn.close()
+        return result

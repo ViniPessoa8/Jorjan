@@ -29,6 +29,10 @@ class CouldNotUpdateUser(BaseException):
 class CouldNotFindProductOwner(BaseException):
     def __str__(self):
         return "Não foi possível encontrar o produto ou o dono do mesmo"
+
+class CouldNotGetUserHistory(BaseException):
+    def __str__(self):
+        return "Não foi possível pesquisar o histórico do usuário"
 # Product ============================================================
 class CouldNotRegisterProduct(BaseException):
     def __str__(self):
@@ -50,3 +54,7 @@ class CouldNotChangeSaleStatus(BaseException):
 class CouldNotRemoveCartItem(BaseException):
     def __str__(self):
         return "Não foi possível remover item do carrinho"
+
+class CouldNotCheckSaleSellerExists(BaseException):
+    def __str__(self):
+        return "Não foi possível encontrar o vendedor desta compra"
