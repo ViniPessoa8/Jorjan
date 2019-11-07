@@ -1,6 +1,9 @@
 def qr_get_users():
     return "SELECT * FROM user;"
 
+def qr_logout(user_email):
+    return f"UPDATE user SET auth=NULL WHERE email='{user_email}';"
+
 def qr_get_user_info(auth):
     return "SELECT name, email, username FROM user WHERE auth='%s';" % (auth)
 

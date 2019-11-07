@@ -2,10 +2,24 @@ from hashlib import sha1
 from ..config.db import get_connection
 from .queries.user_queries import (
     qr_get_user_by_email_ps,
+    qr_logout,
     qr_get_user_by_username_ps,
     qr_update_auth,
     qr_get_user_by_auth
 )
+
+def logout(user_email):
+    conn   = get_connection()
+    result = None
+
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_logout(user_email))
+        
+        conn.commit()
+    finally:
+        conn.close()
+        return { 'email': user_email }  
 
 def check_login_email(email, ps):
     ps     = sha1(ps.encode('utf-8')).hexdigest()

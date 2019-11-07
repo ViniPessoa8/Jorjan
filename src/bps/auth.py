@@ -1,9 +1,11 @@
 from ..util.jwt_manager import encode
-from flask import Blueprint, request
+from flask import Blueprint, request, abort
 from random import randint
 from ..util.errors import InvalidRequest, InvalidLogin, error_resp
 from ..db.auth import (
     check_login_email, 
+    check_auth,
+    logout,
     check_login_username,
     update_auth_key
 )
@@ -47,3 +49,19 @@ def login():
         }
     except BaseException as e:
         return error_resp(e)
+
+@bp.route('/logout', methods=['DELETE'])
+def user_logout():
+    auth = request.headers.get("Authorization") 
+    
+    user = check_auth(auth)
+    if user == None:
+        abort(403)
+    
+    try:
+        result = logout(user['email'])
+
+        return result
+    except BaseException as e:
+        return error_resp(e)
+    
