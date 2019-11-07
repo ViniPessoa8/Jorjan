@@ -38,7 +38,7 @@ def category_register():
         return result
 
 
-@bp.route('/get', methods=['GET'])
+@bp.route('/', methods=['GET'])
 def category_list():
     params = request.args
     auth   = request.headers.get('Authorization')
