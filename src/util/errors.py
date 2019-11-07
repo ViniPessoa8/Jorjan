@@ -42,6 +42,10 @@ class NoAvailableSellers(BaseException):
     def __str__(self):
         return "Não há vendedores disponíveis"
 
+class CouldNotFindUser(BaseException):
+    def __str__(self):
+        return "Não foi possível encontrar o usuário"
+
 # Product ============================================================
 class CouldNotRegisterProduct(BaseException):
     def __str__(self):
