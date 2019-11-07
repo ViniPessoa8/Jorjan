@@ -1,7 +1,8 @@
 from datetime import date
+from ...util.constants import SALE_STATES
 
 def qr_check_cart_exists(buyer_id):
-    return f"SELECT * FROM sales WHERE (buyer_id='{buyer_id}' and status=1)"
+    return f"SELECT * FROM sales WHERE (buyer_id='{buyer_id}' and status={SALE_STATES['CART']})"
 
 def qr_create_cart(buyer_id, seller_id):
     return f"INSERT INTO sales(buyer_id, seller_id, date, status) \
@@ -40,3 +41,5 @@ def qr_get_cart_info(cart_id):
     INNER JOIN sales_has_product sp ON s.id = sp.sales_id
     INNER JOIN product p ON sp.product_id = p.id WHERE s.id = {cart_id};
 """
+def qr_check_sale_exists_seller(seller_id, sale_id):
+    return f"SELECT * FROM sales WHERE (seller_id='{seller_id}' and id={sale_id} and status={SALE_STATES['WAITING_CONFIRMATION']})"

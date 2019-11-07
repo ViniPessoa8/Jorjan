@@ -8,6 +8,7 @@ from ..util.errors import (
 )
 from .queries.sale_queries import (
     qr_check_cart_exists,
+    qr_check_sale_exists_seller,
     qr_add_to_cart,
     qr_create_cart,
     qr_get_cart_info,
@@ -159,5 +160,16 @@ def get_cart_info(cart_id):
     except BaseException:
         result = error_resp(CouldNotRemoveCartItem())
     finally:
+        conn.close()
+        return result
+
+def check_sale_exists_seller(seller_id, sale_id):
+    conn = get_connection()
+    result = None
+
+    with conn.cursor() as c:
+        c.execute(qr_check_sale_exists_seller(seller_id=seller_id, sale_id=sale_id))
+        result = c.fetchone()
+
         conn.close()
         return result

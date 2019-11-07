@@ -1,9 +1,11 @@
 from flask import Blueprint, request, abort
+from ..util.constants import SALE_STATES
 from ..util.errors import error_resp, InvalidRequest, CouldNotFindProductOwner
 from ..db.auth import check_auth
 from ..db.user import get_product_owner
 from ..db.sale import (
     check_cart_exists,
+    check_sale_exists_seller,
     add_product_cart,
     add_product_new_cart,
     get_sale_by_buyer,
@@ -102,12 +104,35 @@ def request_sale():
     try:
         sale = get_sale_by_buyer(buyer_id=user['id'])
 
-        if sale == None or sale['status'] != 1:
+        if sale == None or sale['status'] != SALE_STATES['CART']:
             raise InvalidRequest
         
-        result = update_sale_info(sale_id=sale['id'], status=2)
+        result = update_sale_info(sale_id=sale['id'], status=SALE_STATES['WAITING_CONFIRMATION'])
 
         return result
     except BaseException as e:
         return error_resp(e)
 
+@bp.route('/confirm_request', methods=['GET'])
+def confirm_request():
+    params = request.args
+    auth   = request.headers.get('Authorization')
+    result = None
+
+    seller = check_auth(auth)
+    if seller == None:
+        abort(403)
+    
+    try:
+        if params == None or not 'sale_id' in params:
+            raise InvalidRequest
+        
+        sale = check_sale_exists_seller(seller_id=seller['id'], sale_id=params['sale_id'])
+        if sale == None:
+            raise InvalidRequest
+
+        result = update_sale_info(sale_id=sale['id'], status=SALE_STATES['WAITING_DELIVERY'])
+    
+        return result
+    except BaseException as e:
+        return error_resp(e)
