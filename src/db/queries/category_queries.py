@@ -11,4 +11,4 @@ def qr_get_categories():
     return "SELECT * FROM Jorjan.category;"
 
 def qr_remove_category_by_id(id):
-    return "DELETE FROM Jorjan.category WHERE id = "+id+";"
+    return f"DELETE FROM Jorjan.category WHERE id = "{id}";"
