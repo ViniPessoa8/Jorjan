@@ -7,7 +7,9 @@ from ..util.errors import (
     UsernameAlreadyRegistered, 
     error_resp, 
     CouldNotRegisterUser,
-    CouldNotFindProductOwner
+    CouldNotFindProductOwner,
+    CouldNotFindUserState,
+    NoAvailableSellers
 )
 
 from .queries.user_queries import (
@@ -20,7 +22,10 @@ from .queries.user_queries import (
     qr_register_user, 
     qr_register_user_with_auth, 
     qr_remove_user,
-    qr_update_pass_by_id
+    qr_update_pass_by_id,
+    qr_get_user_state_by_id,
+    qr_set_user_state_by_id,
+    qr_get_available_sellers
 )
 
 def get_all_users():
@@ -119,9 +124,68 @@ def get_product_owner(product_id):
         if result == None:
             raise CouldNotFindProductOwner
         
-    except BaseException as e:
+    except BaseException:
         result = error_resp(CouldNotFindProductOwner())
     finally:
         conn.close()
         return result
     
+def get_user_state_by_id(id):
+    conn   = get_connection()
+    result = None
+    
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_get_user_state_by_id(id=id))
+            result = c.fetchone()
+        
+        if result == None:
+            raise CouldNotFindUserState
+        
+    except BaseException:
+        result = error_resp(CouldNotFindUserState())
+    finally:
+        conn.close()
+        return result
+
+def set_user_state_by_id(id, state):
+    conn   = get_connection()
+    result = None
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_get_user_state_by_id(id=id))
+            result = c.fetchone()
+
+            if result == None:
+                raise CouldNotFindUserState
+
+            c.execute (qr_set_user_state_by_id(id=id, state=state))
+            conn.commit()
+        result = {'id':id, 'state':state}
+    except BaseException as e:
+        result = error_resp(e)
+    finally:
+        conn.close()
+        return result
+
+def get_available_sellers():
+    conn   = get_connection()
+    result = None
+
+    print(result)
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_get_available_sellers())
+            result = c.fetchall()
+            print(result)
+
+
+            if (result == ()):
+                raise NoAvailableSellers
+
+        result = {'sellers':result}
+    except BaseException:
+        result = error_resp(NoAvailableSellers())
+    finally:
+        conn.close()
+        return result

@@ -29,6 +29,15 @@ class CouldNotUpdateUser(BaseException):
 class CouldNotFindProductOwner(BaseException):
     def __str__(self):
         return "Não foi possível encontrar o produto ou o dono do mesmo"
+
+class CouldNotFindUserState(BaseException):
+    def __str__(self):
+        return "Não foi possível encontrar o estado do usuário"
+
+class NoAvailableSellers(BaseException):
+    def __str__(self):
+        return "Não há vendedores disponíveis"
+
 # Product ============================================================
 class CouldNotRegisterProduct(BaseException):
     def __str__(self):
