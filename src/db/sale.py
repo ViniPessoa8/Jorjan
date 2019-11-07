@@ -152,7 +152,6 @@ def remove_product_from_cart(product_id, cart_id):
     except BaseException:
         result = error_resp(CouldNotRemoveCartItem())
     finally:
-        print(result)
         conn.close()
         return result
 
