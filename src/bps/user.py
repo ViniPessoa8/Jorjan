@@ -115,6 +115,7 @@ def user_get_available_sellers():
     user = check_auth(auth)
     if user == None:
         abort(403)
-
-    return get_available_sellers()
-    
+    try:
+        return get_available_sellers()
+    except BaseException as e:
+        return error_resp(e)
