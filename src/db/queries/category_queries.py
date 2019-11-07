@@ -5,7 +5,7 @@ def qr_get_category_by_id(id):
     return f"SELECT * FROM Jorjan.category WHERE id = {id};"
 
 def qr_get_category_by_name(name):
-    return "SELECT * FROM Jorjan.category WHERE name = \""+name+"\";"
+    return f"SELECT * FROM Jorjan.category WHERE name = \"{name}\";"
     
 def qr_get_categories():
     return "SELECT * FROM Jorjan.category;"
