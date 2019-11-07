@@ -1,3 +1,5 @@
+from ...util.constants import USER_STATES
+
 def qr_get_users():
     return "SELECT * FROM user;"
 
@@ -42,4 +44,25 @@ def qr_get_product_owner(product_id):
         FROM user u
         LEFT JOIN product p ON (p.owner_id = u.id)
         WHERE p.id={product_id};
+    """
+
+def qr_get_user_state_by_id(id):
+    return f"""
+        SELECT 
+        FROM user
+        WHERE id={id};
+    """
+
+def qr_get_available_sellers():
+    return f"""
+        SELECT 
+        FROM user
+        where id={id} AND state={USER_STATES['Seller']};
+    """
+
+def qr_set_user_state_by_id(id, state):
+    return f"""
+        UPDATE user
+        SET state={state}
+        WHERE id={id};
     """
