@@ -1,26 +1,24 @@
 [
     {
-        "register_name": "\"Jansen\"",
-        "register_email": "\"jansenalcantara@gmail.com\"",
-        "register_password": "\"Abacate1234\"",
-        "register_username": "\"JansenJunior\""
+        "seller_name": "\"Jansen\"",
+        "seller_email": "\"jansenalcantara@gmail.com\"",
+        "seller_password": "\"Abacate1234\"",
+        "seller_username": "\"JansenJunior\"",
+        
+        "buyer_name": "\"Vinicius\"",
+    	"buyer_email": "\"viniciuspessoa@gmail.com\"",
+    	"buyer_password": "\"Banana1234\"",
+    	"buyer_username": "\"ViniPessoa\""
     },
     {
-    	"register_name": "\"Vinicius\"",
-    	"register_email": "\"viniciuspessoa@gmail.com\"",
-    	"register_password": "\"Banana1234\"",
-    	"register_username": "\"ViniPessoa\""
-    },
-    {
-    	"register_name": "\"Lais\"",
-    	"register_email": "\"laiscalderaro@gmail.com\"",
-    	"register_password": "\"Laranha1234\"",
-    	"register_username": "\"LaisCalderaro\""
-    },
-    {
-    	"register_name": "\"Jordan\"",
-    	"register_email": "\"gustavojordan@gmail.com\"",
-    	"register_password": "\"Goiaba1234\"",
-    	"register_username": "\"Jordan\""
+    	"seller_name": "\"Lais\"",
+    	"seller_email": "\"laiscalderaro@gmail.com\"",
+    	"seller_password": "\"Laranha1234\"",
+        "seller_username": "\"LaisCalderaro\"",
+        
+    	"buyer_name": "\"Jordan\"",
+    	"buyer_email": "\"gustavojordan@gmail.com\"",
+    	"buyer_password": "\"Goiaba1234\"",
+    	"buyer_username": "\"Jordan\""
     }
 ]

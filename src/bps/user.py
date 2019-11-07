@@ -1,8 +1,6 @@
 from flask import Blueprint, request, abort
 from ..util.errors import InvalidRequest, CouldNotUpdateUser, CouldNotRegisterUser, error_resp
 
-from ..db.user import 
-
 from ..db.user import (
     get_all_users, 
     register_new_user, 

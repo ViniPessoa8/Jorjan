@@ -61,6 +61,7 @@ def qr_get_history(user_id):
         LEFT JOIN sales_has_product sp on s.id = sp.sales_id
         LEFT JOIN product p            on p.id = sp.product_id
         WHERE (s.status <> {SALE_STATES['CART']} and u.id = {user_id});
+    """
 
 def qr_get_user_state_by_id(id):
     return f"""
