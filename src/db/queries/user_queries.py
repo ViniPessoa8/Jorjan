@@ -1,4 +1,4 @@
-from ...util.constants import SALE_STATES
+from ...util.constants import SALE_STATES, USER_STATES
 
 def qr_get_users():
     return "SELECT * FROM user;"
@@ -58,4 +58,24 @@ def qr_get_history(user_id):
         LEFT JOIN sales_has_product sp on s.id = sp.sales_id
         LEFT JOIN product p            on p.id = sp.product_id
         WHERE (s.status <> {SALE_STATES['CART']} and u.id = {user_id});
+
+def qr_get_user_state_by_id(id):
+    return f"""
+        SELECT state
+        FROM user
+        WHERE id={id};
+    """
+
+def qr_get_available_sellers():
+    return f"""
+        SELECT *
+        FROM user
+        where state={USER_STATES['SELLER']};
+    """
+
+def qr_set_user_state_by_id(id, state):
+    return f"""
+        UPDATE user
+        SET state={state}
+        WHERE id={id};
     """

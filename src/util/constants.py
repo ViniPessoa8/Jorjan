@@ -5,3 +5,8 @@ SALE_STATES = {
 	'WAITING_DELIVERY':     3,
     'FINISHED':             4 
 }
+
+USER_STATES = {
+	'BUYER':   0,
+	'SELLER':  1
+}

@@ -33,11 +33,34 @@ class CouldNotFindProductOwner(BaseException):
 class CouldNotGetUserHistory(BaseException):
     def __str__(self):
         return "Não foi possível pesquisar o histórico do usuário"
+
+class CouldNotFindUserState(BaseException):
+    def __str__(self):
+        return "Não foi possível encontrar o estado do usuário"
+
+class NoAvailableSellers(BaseException):
+    def __str__(self):
+        return "Não há vendedores disponíveis"
+
 # Product ============================================================
 class CouldNotRegisterProduct(BaseException):
     def __str__(self):
         return "Não foi possível registrar o produto"
 
+# Category ============================================================
+class CategoryNotFound(BaseException):
+    def __str__(self):
+        return "Não foi possível encontrar a categoria"
+
+class CouldNotRegisterCategory(BaseException):
+    def __str__(self):
+        return "Não foi possível registrar a categoria"
+
+class EmptyCategoryTable(BaseException):
+    def __str__(self):
+        return "Não há categorias registradas"
+
+        
 # Sales ==============================================================
 class CouldNotGetSaleInfo(BaseException):
     def __str__(self):
