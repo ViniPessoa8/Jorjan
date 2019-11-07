@@ -22,3 +22,6 @@ def qr_get_sale_product(product_id, cart_id):
 
 def qr_update_sale_product(product_id, quantity, cart_id):
     return f"UPDATE sales_has_product SET quantity={quantity} WHERE (sales_id={cart_id} and product_id={product_id});"
+
+def qr_remove_product_from_cart(product_id, cart_id):
+    return f"DELETE FROM sales_has_product WHERE (product_id={product_id} and sales_id={cart_id});"

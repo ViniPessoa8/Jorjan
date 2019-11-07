@@ -1,5 +1,11 @@
 from ..config.db import get_connection
-from ..util.errors import error_resp, CouldNotAddToCart, CouldNotStartCart, CouldNotChangeSaleStatus
+from ..util.errors import (
+    error_resp, 
+    CouldNotAddToCart,
+    CouldNotStartCart, 
+    CouldNotChangeSaleStatus,
+    CouldNotRemoveCartItem
+)
 from .queries.sale_queries import (
     qr_check_cart_exists,
     qr_add_to_cart,
@@ -7,7 +13,8 @@ from .queries.sale_queries import (
     qr_get_sale_by_buyer,
     qr_get_sale_product,
     qr_update_sale_product,
-    qr_update_sale_info
+    qr_update_sale_info,
+    qr_remove_product_from_cart
 )
 
 def check_cart_exists(buyer_id):
@@ -101,6 +108,22 @@ def update_sale_info(sale_id, status):
         }
     except BaseException:
         result = error_resp(CouldNotChangeSaleStatus())
+    finally:
+        conn.close()
+        return result
+
+def remove_product_from_cart(product_id, cart_id):
+    conn = get_connection()
+    result = None
+
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_remove_product_from_cart(product_id=product_id, cart_id=cart_id))
+        conn.commit()
+
+        result = { 'product_id': product_id }
+    except BaseException:
+        error_resp(CouldNotRemoveCartItem())
     finally:
         conn.close()
         return result

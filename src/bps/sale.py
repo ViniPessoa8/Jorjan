@@ -7,7 +7,8 @@ from ..db.sale import (
     add_product_cart,
     add_product_new_cart,
     get_sale_by_buyer,
-    update_sale_info
+    update_sale_info,
+    remove_product_from_cart
 )
 
 bp = Blueprint('sale', __name__, url_prefix='/sale')
@@ -44,6 +45,32 @@ def add_to_cart():
         return result
     except BaseException as e:
         return error_resp(e)
+
+@bp.route('/cart', methods=['DELETE'])
+def remove_from_cart():
+    params = request.args
+    auth   = request.headers.get('Authorization')
+    result = None
+
+    user = check_auth(auth)
+    if user == None:
+        abort(403)
+    
+    try:
+        if params == None or not 'product_id' in params:
+            raise InvalidRequest
+        
+        cart = check_cart_exists(buyer_id=user['id'])
+        if cart == None:
+            raise InvalidRequest
+
+        result = remove_product_from_cart(product_id=params['product_id'], cart_id=cart['id'])
+    
+        return result
+    except BaseException as e:
+        return error_resp(e)
+
+
 
 @bp.route('/buy', methods=['GET'])
 def request_sale():

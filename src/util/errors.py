@@ -46,3 +46,7 @@ class CouldNotAddToCart(BaseException):
 class CouldNotChangeSaleStatus(BaseException):
     def __str__(self):
         return "Não foi possível alterar sua compra"
+
+class CouldNotRemoveCartItem(BaseException):
+    def __str__(self):
+        return "Não foi possível remover item do carrinho"
