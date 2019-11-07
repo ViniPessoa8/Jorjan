@@ -65,7 +65,6 @@ def add_product_new_cart(buyer_id, product_id, quantity, seller_id):
         conn.commit()
         
         cart = check_cart_exists(buyer_id)
-        print(cart)
         if 'error' in cart:
             raise CouldNotStartCart
 
@@ -84,12 +83,12 @@ def add_product_new_cart(buyer_id, product_id, quantity, seller_id):
         conn.close()
         return result
         
-def get_sale_by_buyer(buyer_id):
+def get_sale_by_buyer(buyer_id, status):
     conn = get_connection()
     result = None
 
     with conn.cursor() as c:
-        c.execute(qr_get_sale_by_buyer(buyer_id))
+        c.execute(qr_get_sale_by_buyer(buyer_id, status))
         result = c.fetchone()
 
         conn.close()

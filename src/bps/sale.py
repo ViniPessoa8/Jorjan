@@ -102,9 +102,8 @@ def request_sale():
         abort(403)
 
     try:
-        sale = get_sale_by_buyer(buyer_id=user['id'])
-
-        if sale == None or sale['status'] != SALE_STATES['CART']:
+        sale = get_sale_by_buyer(buyer_id=user['id'], status=SALE_STATES['CART'])
+        if sale == None:
             raise InvalidRequest
         
         result = update_sale_info(sale_id=sale['id'], status=SALE_STATES['WAITING_CONFIRMATION'])
@@ -128,10 +127,34 @@ def confirm_request():
             raise InvalidRequest
         
         sale = check_sale_exists_seller(seller_id=seller['id'], sale_id=params['sale_id'])
-        if sale == None:
+        if sale == None or sale['status'] != SALE_STATES['WAITING_CONFIRMATION']:
             raise InvalidRequest
 
         result = update_sale_info(sale_id=sale['id'], status=SALE_STATES['WAITING_DELIVERY'])
+    
+        return result
+    except BaseException as e:
+        return error_resp(e)
+
+@bp.route('/confirm_delivery', methods=['GET'])
+def confirm_delivery():
+    params = request.args
+    auth   = request.headers.get('Authorization')
+    result = None
+
+    seller = check_auth(auth)
+    if seller == None:
+        abort(403)
+    
+    try:
+        if params == None or not 'sale_id' in params:
+            raise InvalidRequest
+        
+        sale = check_sale_exists_seller(seller_id=seller['id'], sale_id=params['sale_id'])
+        if sale == None or sale['status'] != SALE_STATES['WAITING_DELIVERY']:
+            raise InvalidRequest
+
+        result = update_sale_info(sale_id=sale['id'], status=SALE_STATES['FINISHED'])
     
         return result
     except BaseException as e:
