@@ -195,13 +195,10 @@ def get_available_sellers():
     conn   = get_connection()
     result = None
 
-    print(result)
     try:
         with conn.cursor() as c:
             c.execute(qr_get_available_sellers())
             result = c.fetchall()
-            print(result)
-
 
             if (result == ()):
                 raise NoAvailableSellers
