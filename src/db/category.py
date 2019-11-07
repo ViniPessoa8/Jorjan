@@ -1,5 +1,5 @@
 from ..config.db import get_connection
-from ..util.errors import error_resp, CouldNotRegisterCategory, CategoryNotFound
+from ..util.errors import error_resp, CouldNotRegisterCategory, CategoryNotFound, EmptyCategoryTable
 from .queries.category_queries import (
     qr_register_category,
     qr_get_categories,
@@ -11,19 +11,18 @@ from .queries.category_queries import (
 def register_category(name):
     conn   = get_connection()
     result = ()
-
     try:
         with conn.cursor() as c:
             # Checks if category already exists
             c.execute(qr_get_category_by_name(name=name))
-            result = c.fetchall()    
-            if c.fetchall() != ():
+            result = c.fetchone()    
+            if result != None:
                 raise CouldNotRegisterCategory
             
             # Registers category
             c.execute(qr_register_category(name=name))
         conn.commit()
-
+        result = {'name':name}
     except CouldNotRegisterCategory as e:
         result = error_resp(e)
     except CategoryNotFound as e:
@@ -35,15 +34,12 @@ def register_category(name):
 def get_categories():
     conn   = get_connection()
     result = ()
-
     try:
         with conn.cursor() as c:
             c.execute(qr_get_categories())
             result = c.fetchall()
-            if result != ():
-                raise CategoryNotFound
-
-    except CategoryNotFound as e:
+        result = {'categories':result}
+    except EmptyCategoryTable as e:
         result = error_resp(e)
     finally:
         conn.close()
@@ -56,10 +52,11 @@ def get_category_by_name(name):
     try:
         with conn.cursor() as c:
             c.execute(qr_get_category_by_name(name=name))
-            result = c.fetchall()    
-            if c.fetchall() != ():
+            result = c.fetchone()  
+            print(result)  
+            if result == None:
                 raise CategoryNotFound
-            
+        
     except CategoryNotFound as e:
         result = error_resp(e)
     finally:
@@ -73,8 +70,8 @@ def get_category_by_id(id):
     try:
         with conn.cursor() as c:
             c.execute(qr_get_category_by_id(id=id))
-            result = c.fetchall()    
-            if c.fetchall() != ():
+            result = c.fetchone()    
+            if result == None:
                 raise CategoryNotFound
             
     except CategoryNotFound as e:
@@ -85,19 +82,19 @@ def get_category_by_id(id):
 
 def remove_category_by_id(id):
     conn   = get_connection()
-    result = ()
 
     try:
         with conn.cursor() as c:
             # Checks if category already exists
             c.execute(qr_get_category_by_id(id=id))
-            result = c.fetchall()    
-            if c.fetchall() != ():
+            result = c.fetchone()    
+            if result != None:
                 raise CategoryNotFound
         
             # Removes category
             c.execute(qr_remove_category_by_id(id=id))
         c.commit()
+        result = {'id':id}
     except CategoryNotFound as e:
         result = error_resp(e)
     finally:

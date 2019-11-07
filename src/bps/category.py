@@ -1,5 +1,6 @@
+from ..config.db import get_connection
 from flask import Blueprint, request, abort
-from ..util.errors import error_resp, InvalidRequest
+from ..util.errors import error_resp, InvalidRequest, CouldNotRegisterCategory, EmptyCategoryTable, CategoryNotFound
 from ..db.auth import check_auth
 from ..db.category import (
     register_category,
@@ -15,58 +16,60 @@ bp = Blueprint('category', __name__, url_prefix='/category')
 def category_register():
     params = request.json
     auth   = request.headers.get('Authorization')
-    result = None
     
     buyer = check_auth(auth)  
     if buyer == None:
         abort(403)
 
     try:
-        if (
-            params == None or
-            not 'name' in params
+        if (params == () or
+        not 'name' in params
         ):
             raise InvalidRequest
-
+        
         name = params["name"]
         result = register_category(name=name)
 
-        return result
+    except InvalidRequest:
+        result = error_resp(e)
     except BaseException as e:
-        return error_resp(e)
+        result = error_resp(e)
+    finally:
+        return result
+
 
 @bp.route('/get', methods=['GET'])
 def category_list():
-    params = request.json
+    params = request.args
     auth   = request.headers.get('Authorization')
     result = None
-    
+
     buyer = check_auth(auth)  
     if buyer == None:
         abort(403)
 
     try:
-        if ( params != None and  (
-            not 'name'  in params or
-            not 'id'    in params)
-        ):
-            raise InvalidRequest
-
-        if (params == None):        
-            result = get_categories()
-            return { "categories": result }
-        
-        if ('name' in params):
-            name = params["name"]
-            result = get_category_by_name(name=name)
-            return { "category": result}
-
         if ('id' in params):
             id = params["id"]
+            print("ID = ", id)
             result = get_category_by_id(id=id)
-            return { "category": result}
+            print(result)
+
+        elif ('name' in params):
+            print("name")
+            name = params["name"]
+            result = get_category_by_name(name=name)
+
+        else:  
+            result = get_categories()      
+            print(result)
+    except InvalidRequest:
+        return error_resp(e)
     except BaseException as e:
         return error_resp(e)
+    finally:
+        return result
+
 
 @bp.route('/remove', methods=['POST'])
 def category_remove():
@@ -78,15 +81,15 @@ def category_remove():
         abort(403)
 
     try:
-        if (
-            params == None or
+        if (params == () or
             not 'id' in params
         ):
             raise InvalidRequest
 
         id = params["id"]
         result = remove_category_by_id(id=id)
-        
-        return result
+
     except BaseException as e:
-        return error_resp(e)
+        result = error_resp(e)
+    finally:
+        return result
