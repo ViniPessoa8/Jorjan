@@ -39,6 +39,11 @@ class CategoryNotFound(BaseException):
 class CouldNotRegisterCategory(BaseException):
     def __str__(self):
         return "Não foi possível registrar a categoria"
+
+class EmptyCategoryTable(BaseException):
+    def __str__(self):
+        return "Não há categorias registradas"
+
         
 # Sales ==============================================================
 class CouldNotStartCart(BaseException):
