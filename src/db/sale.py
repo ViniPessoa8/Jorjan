@@ -10,6 +10,7 @@ from .queries.sale_queries import (
     qr_check_cart_exists,
     qr_add_to_cart,
     qr_create_cart,
+    qr_get_cart_info,
     qr_get_sale_by_buyer,
     qr_get_sale_product,
     qr_update_sale_product,
@@ -124,6 +125,39 @@ def remove_product_from_cart(product_id, cart_id):
         result = { 'product_id': product_id }
     except BaseException:
         error_resp(CouldNotRemoveCartItem())
+    finally:
+        conn.close()
+        return result
+
+def get_cart_info(cart_id):
+    conn = get_connection()
+    result = None
+
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_get_cart_info(cart_id=cart_id))
+            result = c.fetchall()
+        
+        if len(result) == 0:
+            return {}
+        
+        sale_id   = result[0]['sale_id']
+        sale_date = result[0]['date']
+        products  = list(map(lambda r: {
+            'name':        r['product_name'],
+            'id':          r['product_id'],
+            'description': r['product_description'],
+            'price':       r['price'],
+            'quantity':    r['quantity'],
+        }, result))
+
+        result = { 
+            'id': sale_id,
+            'date': sale_date,
+            'products': products
+        }
+    except BaseException:
+        result = error_resp(CouldNotRemoveCartItem())
     finally:
         conn.close()
         return result

@@ -8,6 +8,7 @@ from ..db.sale import (
     add_product_new_cart,
     get_sale_by_buyer,
     update_sale_info,
+    get_cart_info,
     remove_product_from_cart
 )
 
@@ -70,7 +71,25 @@ def remove_from_cart():
     except BaseException as e:
         return error_resp(e)
 
+@bp.route('/cart', methods=['GET'])
+def get_cart():
+    auth   = request.headers.get('Authorization')
+    result = None
 
+    user = check_auth(auth)
+    if user == None:
+        abort(403)
+    
+    try:
+        cart = check_cart_exists(buyer_id=user['id'])
+        if cart == None:
+            raise InvalidRequest
+
+        result = get_cart_info(cart_id=cart['id'])
+
+        return result
+    except BaseException as e:
+        return error_resp(e)
 
 @bp.route('/buy', methods=['GET'])
 def request_sale():

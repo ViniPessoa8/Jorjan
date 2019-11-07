@@ -25,3 +25,18 @@ def qr_update_sale_product(product_id, quantity, cart_id):
 
 def qr_remove_product_from_cart(product_id, cart_id):
     return f"DELETE FROM sales_has_product WHERE (product_id={product_id} and sales_id={cart_id});"
+
+def qr_get_cart_info(cart_id):
+    return f"""
+    SELECT 
+        s.id as sale_id, 
+        s.date, 
+        sp.quantity, 
+        p.id as product_id, 
+        p.name as product_name, 
+        p.description as product_description, 
+        p.price
+    FROM sales s 
+    INNER JOIN sales_has_product sp ON s.id = sp.sales_id
+    INNER JOIN product p ON sp.product_id = p.id WHERE s.id = {cart_id};
+"""
