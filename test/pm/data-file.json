@@ -8,7 +8,34 @@
         "buyer_name": "\"Vinicius\"",
     	"buyer_email": "\"viniciuspessoa@gmail.com\"",
     	"buyer_password": "\"Banana1234\"",
-    	"buyer_username": "\"ViniPessoa\""
+        "buyer_username": "\"ViniPessoa\"",
+        
+        "new_password": "\"JucimarMePassaPorFavor\"",
+
+        "category_1": "\"Doce\"" ,
+        "category_2": "\"Salgados\"",
+        "category_3": "\"Sorvete\"" ,
+
+        "produto_1_name": "\"Brigadeiro de Leite Ninho\"",
+        "produto_1_description": "\"Delicioso Brigadeiro de Leite Ninho\"",
+        "produto_1_price": "1.5",
+        "produto_1_category_id": "1",
+        "produto_1_stock": "20",
+
+        "produto_2_name": "\"Empada de Queijo e Presunto\"",
+        "produto_2_description": "\"Empada Assadinha\"",
+        "produto_2_price": 2,
+        "produto_2_category_id": 2,
+        "produto_2_stock": 25,
+        
+        "produto_3_name": "\"Picolé de Açaí\"",
+        "produto_3_description": "\"Picolé geladinho pra refrescar sua tarde\"",
+        "produto_3_price": 2,
+        "produto_3_category_id": 3,
+        "produto_3_stock": 18,
+
+        "product_amount": 3
+        
     },
     {
     	"seller_name": "\"Lais\"",
@@ -19,6 +46,32 @@
     	"buyer_name": "\"Jordan\"",
     	"buyer_email": "\"gustavojordan@gmail.com\"",
     	"buyer_password": "\"Goiaba1234\"",
-    	"buyer_username": "\"Jordan\""
+        "buyer_username": "\"Jordan\"",
+        
+        "new_password": "\"MaquinaDeLavar\"",
+
+        "category_1": "\"Bolos\"",
+        "category_2": "\"Pizzas\"",
+        "category_3": "\"Refrigerante\"",
+
+        "produto_1_name": "\"Bolo de Queijo\"",
+        "produto_1_description": "\"Bolo de Queijo, sim acabou a imaginação\"",
+        "produto_1_price": 3,
+        "produto_1_category_id": 4,
+        "produto_1_stock": 15,
+
+        "produto_2_name": "\"Fatia de Pizza\"",
+        "produto_2_description": "\"Portuguesa, Calabreza, Mussarela\"",
+        "produto_2_price": 2.5,
+        "produto_2_category_id": 5,
+        "produto_2_stock": 35,
+
+        "produto_3_name": "\"Baré\"",
+        "produto_3_description": "\"Nome autoexplicativo\"",
+        "produto_3_price": 2.5,
+        "produto_3_category_id": 6,
+        "produto_3_stock": 12,
+
+        "product_amount": 6
     }
 ]
