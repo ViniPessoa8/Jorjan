@@ -8,5 +8,8 @@ def qr_get_products():
 def qr_get_product_id(product_id):
     return f"SELECT * FROM product WHERE id={product_id};"
 
+def qr_get_products_seller(seller_id):
+    return f"SELECT * FROM product WHERE owner_id={seller_id};"
+
 def qr_update_product_stock(product_id, quantity):
     return f"UPDATE product SET stock={quantity} WHERE id={product_id}"
