@@ -86,13 +86,13 @@ def update_product_stock(product_id, quantity):
 def get_products_seller(seller_id):
     conn   = get_connection()
     result = None
-    return_json = None
+    # return_json = None
 
     try:
         with conn.cursor() as c:
             c.execute(qr_get_products_seller(seller_id))
             result = c.fetchall()
-            json = result[0]
+            # json = result[0]
 
             # for obj in result:
             #     return_json
