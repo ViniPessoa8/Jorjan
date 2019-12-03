@@ -10,7 +10,8 @@ from .queries.product_queries import (
     qr_register_product,
     qr_get_product_id,
     qr_update_product_stock,
-    qr_get_products
+    qr_get_products,
+    qr_get_products_seller
 )
 
 def register_new_product(product, owner_id):
@@ -78,6 +79,28 @@ def update_product_stock(product_id, quantity):
     except BaseException as e:
         print(e)
         result = error_resp(CouldNotUpdateProduct())
+    finally:
+        conn.close()
+        return result
+
+def get_products_seller(seller_id):
+    conn   = get_connection()
+    result = None
+    return_json = None
+
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_get_products_seller(seller_id))
+            result = c.fetchall()
+            json = result[0]
+
+            # for obj in result:
+            #     return_json
+
+            # result = return_json
+            # print('[DEBUG] ', return_json)
+    except BaseException:
+        result = error_resp(CouldNotGetProduct())
     finally:
         conn.close()
         return result
