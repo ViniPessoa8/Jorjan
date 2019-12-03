@@ -5,8 +5,11 @@ use Jorjan;
     SELECT * FROM Jorjan.sales;
     SELECT * FROM Jorjan.sales_has_product;
     SELECT * FROM Jorjan.category;
+    SELECT * FROM Jorjan.product;
     SELECT state FROM user WHERE id=1;
 	UPDATE user SET state=1 WHERE id=1;
+    SELECT * FROM Jorjan.product p, Jorjan.`user` u WHERE p.owner_id=1 AND u.id = 1;
+    
 -- Cadastrar Usuário
 	INSERT INTO Jorjan.`user`(email, username, `password`, `name`, state, picture, avaliation, auth)
 	VALUES ('gustavo@gmail.com','gusta_braga',SHA('123'),'Grustavo Braga Mota',0,NULL,NULL,NULL);
@@ -17,14 +20,30 @@ use Jorjan;
     INSERT INTO Jorjan.`user` (email, username, `password`, `name`, state, picture, avaliation, auth)
 	VALUES ('vcbp.snf18@uea.edu.br','ViniPessoa8',SHA('123'),'Vinícius Cavalcante de Brito Pessoa',0,NULL,NULL,NULL);
 
+-- Criar Categoria
+	INSERT INTO Jorjan.category(`name`)
+    VALUES ("Doces");
+    
+    INSERT INTO Jorjan.category(`name`)
+    VALUES ("Salgados");
+
 -- Realizar Login
 	SELECT *
 	FROM Jorjan.`user`
 	WHERE email = 'gustavo@gmail.com' AND `password` = SHA('espinafre2000');
 
 -- Cadastrar Produto
-	INSERT INTO Jorjan.product(name, description, price, stock, category, owner_id)
+	INSERT INTO Jorjan.product(`name`, `description`, price, stock, category, owner_id)
 	VALUES ('Brigadeiro', 'Bolinhas de chocolate.', 2.00, 20, 1, 1);
+    
+    INSERT INTO Jorjan.product(name, description, price, stock, category, owner_id)
+	VALUES ('Brigadeirão', 'Bolinhas de chocolate recheadas.', 3.00, 20, 1, 1);
+    
+    INSERT INTO Jorjan.product(name, description, price, stock, category, owner_id)
+	VALUES ('Brownie', 'Mini bolo de chocolate.', 4.00, 20, 1, 1);
+    
+    INSERT INTO Jorjan.product(name, description, price, stock, category, owner_id)
+	VALUES ('Brigadeiro', 'Bolinhas de chocolate.', 1.00, 20, 1, 2);
 
 -- STATUS DO PEDIDO
 	-- 0 -> CANCELADO
@@ -141,10 +160,7 @@ use Jorjan;
 	UPDATE Jorjan.sales
         SET `status` = 0
         WHERE id = 1;
-        
--- Criar Categoria
-	INSERT INTO Jorjan.category(`name`)
-    VALUES ("Doces");
+	
     
 -- Remover Categoria
 	DELETE FROM Jorjan.category
