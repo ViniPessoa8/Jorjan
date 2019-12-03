@@ -3,7 +3,8 @@ from ..util.errors import error_resp, InvalidRequest
 from ..db.auth import check_auth
 from ..db.product import (
     register_new_product,
-    get_products
+    get_products,
+    get_products_seller,
 )
 
 bp = Blueprint('product', __name__, url_prefix='/product')
@@ -35,15 +36,28 @@ def product_register():
 
 @bp.route('/all', methods=['GET'])
 def get_all_products():
-    params = request.json
+    params = request.args
     auth   = request.headers.get('Authorization')
+    result = None
 
     user = check_auth(auth)
-    if user == None:
-        abort(403)
+    # if user == None:
+    #     abort(403)
+
 
     try:    
-        result = get_products()
-        return result
+        if params:
+            seller_id = params['seller_id']
+            if seller_id:
+                # print(1)
+                result = get_products_seller(seller_id) 
+                print(result)
+
+            else:
+                result = 'No Seller'
+        else:
+            result = get_products()
     except BaseException as e:
-        return error_resp(e)
+        result = error_resp(e)
+    finally:
+        return {'result': result}
