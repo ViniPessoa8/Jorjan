@@ -37,12 +37,12 @@ def product_register():
 @bp.route('/all', methods=['GET'])
 def get_all_products():
     params = request.args
-    auth   = request.headers.get('Authorization')
+    # auth   = request.headers.get('Authorization')
     result = None
 
-    user = check_auth(auth)
+    # user = check_auth(auth)
     # if user == None:
-    #     abort(403)
+        # abort(403)
 
 
     try:    
