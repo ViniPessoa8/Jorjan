@@ -44,6 +44,9 @@ def qr_remove_user(email, ps):
 def qr_update_auth(auth, email, ps):
     return "UPDATE user SET auth = '%s' WHERE email = '%s' AND password = '%s'" % (auth, email, ps)
 
+def qr_update_auth_user(auth, email):
+    return "UPDATE user SET auth = '%s' WHERE email = '%s'" % (auth, email)
+
 def qr_update_pass_by_id(email, new_pass):
     return "UPDATE user SET password='%s' WHERE email='%s';" % (new_pass, email)
 
