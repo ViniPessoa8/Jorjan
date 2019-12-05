@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `Jorjan`.`user` (
   `picture` VARCHAR(255) NULL,
   `avaliation` FLOAT(1) NULL,
   `auth` VARCHAR(500) NULL,
+  `isActivated` BOOL,
   PRIMARY KEY (`id`));
 
 
@@ -55,7 +56,6 @@ CREATE TABLE IF NOT EXISTS `Jorjan`.`product` (
   `stock` INT(6) NOT NULL DEFAULT 0,
   `owner_id` INT(255) NOT NULL,
   `image` LONGTEXT,
-  `isActivated` BOOL,
   INDEX `fk_product_user1_idx` (`owner_id` ASC),
   PRIMARY KEY (`id`, `category`),
   INDEX `fk_product_category1_idx` (`category` ASC),
