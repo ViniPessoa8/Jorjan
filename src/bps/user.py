@@ -4,6 +4,7 @@ from random import randint
 from ..util.errors import InvalidRequest, CouldNotUpdateUser, CouldNotRegisterUser, CouldNotFindUser, error_resp
 from ..util.jwt_manager import encode
 from ..db.user import (
+    activate_user,
     get_all_users, 
     register_new_user, 
     get_info, 
@@ -49,6 +50,21 @@ def create_user_blueprint(mail):
             username = params["username"]
 
             result = register_new_user(name=name, email=email, ps=ps, username=username)
+            
+            if 'error' in result:
+                return result
+
+            auth = result['auth']
+            print(auth)
+
+            mensagem = f"""
+            Caro(a) {name}, para ativar a sua conta acesse esse
+            """
+
+            msg = Message("Reset de Senha", sender="noreply@teste.com", recipients=[email])
+            msg.body = f'{mensagem} link'
+            msg.html = f'<p>{mensagem}<a href="http://localhost:5000/user/activate?auth={auth}">link</a></p>'
+            mail.send(msg)
             
             return result
         except BaseException as e:
@@ -197,6 +213,31 @@ def create_user_blueprint(mail):
             mail.send(msg)
 
             return { 'status': 'Done!' }
+        except BaseException as e:
+            return error_resp(e)
+
+    @bp.route('/activate', methods=['GET'])
+    def user_activate_profile():
+        auth = request.args['auth']
+
+        user = check_auth(auth)
+        if user == None:
+            abort(403)
+
+        try:
+            result = activate_user(auth)
+            if 'error' in result:
+                return result
+
+            return """
+            <body>
+                <p>Email Ativado. Se não for redirecionado em alguns instantes, aperte nesse 
+                <a href='http://localhost:3000/'>link</a></p>
+                <script>
+                    window.location.href = 'http://localhost:3000/'
+                </script>
+            </body>
+            """
         except BaseException as e:
             return error_resp(e)
 

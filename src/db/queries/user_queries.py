@@ -18,6 +18,9 @@ def qr_get_user_name_by_id(id):
 def qr_get_user_by_email(email):
     return "SELECT name, email, auth, id, username FROM user WHERE email='%s'" % (email)
 
+def qr_activate_user(auth):
+    return f"UPDATE user SET isActivated=1 WHERE auth='{auth}';"
+
 def qr_get_user_by_username(username):
     return "SELECT name, email, auth, id, username FROM user WHERE username='%s'" % (username)
 

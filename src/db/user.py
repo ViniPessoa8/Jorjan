@@ -33,7 +33,8 @@ from .queries.user_queries import (
     qr_get_available_sellers,
     qr_update_user_profile,
     qr_update_auth_user,
-    qr_get_user_name_by_id
+    qr_get_user_name_by_id,
+    qr_activate_user
 )
 
 def get_all_users():
@@ -300,6 +301,21 @@ def update_auth_key_user(auth, email):
             c.execute(qr_update_auth_user(auth=auth, email=email))
         conn.commit()
         result = True
+    finally:
+        conn.close()
+        return result
+
+def activate_user(auth):
+    conn   = get_connection()
+    result = ()
+
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_activate_user(auth))
+        conn.commit()
+        result = { 'status': 'Done!' }
+    except BaseException as e:
+        result = error_resp(e)
     finally:
         conn.close()
         return result
