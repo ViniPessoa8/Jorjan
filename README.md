@@ -1,5 +1,11 @@
 # Backend - Flask
 
+- Requirements:
+    - Anaconda:
+        - https://docs.anaconda.com/anaconda/install/
+    - Pip:
+        - ```apt install python3-pip```
+
 - Setup:
     - ```source bin/activate```
     - ```pip install -r requiremets.tx```
