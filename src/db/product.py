@@ -10,6 +10,7 @@ from ..util.errors import (
 )
 from .queries.product_queries import (
     qr_register_product,
+    qr_register_product_with_image,
     qr_get_product_id,
     qr_update_product_stock,
     qr_get_products,
@@ -23,7 +24,10 @@ def register_new_product(product, owner_id):
 
     try:
         with conn.cursor() as c:
-            c.execute(qr_register_product(product=product, owner_id=owner_id))
+            if (product['image'] == None or product['image'] == ''):
+                c.execute(qr_register_product(product=product, owner_id=owner_id))
+            else:
+                c.execute(qr_register_product_with_image(product=product, owner_id=owner_id))
         conn.commit()
 
         result = { 
