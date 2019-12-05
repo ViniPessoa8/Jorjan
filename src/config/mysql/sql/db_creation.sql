@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `Jorjan`.`product` (
   `price` FLOAT(3) NOT NULL DEFAULT 0.0,
   `stock` INT(6) NOT NULL DEFAULT 0,
   `owner_id` INT(255) NOT NULL,
+  `image` LONGTEXT,
   INDEX `fk_product_user1_idx` (`owner_id` ASC),
   PRIMARY KEY (`id`, `category`),
   INDEX `fk_product_category1_idx` (`category` ASC),
