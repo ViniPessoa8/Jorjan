@@ -1,4 +1,4 @@
-from flask import Blueprint, request, abort, jsonify
+from flask import Blueprint, request, abort
 from ..util.errors import error_resp, InvalidRequest
 from ..db.auth import check_auth
 from ..db.product import (
@@ -41,25 +41,13 @@ def get_all_products():
     result = None
 
     user = check_auth(auth)
-    # if user == None:
-    #     abort(403)
-
+    print(user)
+    if user == None:
+        abort(403)
 
     try:    
-        if params:
-            seller_id = params['seller_id']
-            if seller_id:
-                # print(1)
-                result = get_products_seller(seller_id)
-                print(result)
-
-            else:
-                result = 'No Seller'
-        else:
-            result = get_products()
+        result = get_products()
     except BaseException as e:
-        print("erro")
         result = error_resp(e)
     finally:
-        print("finally")
-        return jsonify(result)
+        return result
