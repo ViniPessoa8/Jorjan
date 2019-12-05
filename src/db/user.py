@@ -31,7 +31,8 @@ from .queries.user_queries import (
     qr_get_user_state_by_id,
     qr_set_user_state_by_id,
     qr_get_available_sellers,
-    qr_update_user_profile
+    qr_update_user_profile,
+    qr_get_user_name_by_id
 )
 
 def get_all_users():
@@ -245,6 +246,24 @@ def get_user_by_id(id):
     try:
         with conn.cursor() as c:
             c.execute(qr_get_user_by_id(id=id))
+            result = c.fetchone()
+        
+        if result == None:
+            raise CouldNotFindUserState
+        
+    except BaseException:
+        result = error_resp(CouldNotFindUserState())
+    finally:
+        conn.close()
+        return result
+
+def get_user_name_by_id(id):
+    conn   = get_connection()
+    result = None
+    
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_get_user_name_by_id(id=id))
             result = c.fetchone()
         
         if result == None:

@@ -12,6 +12,9 @@ def qr_get_user_info(auth):
 def qr_get_user_by_id(id):
     return "SELECT name, email, auth, id, username, password FROM user WHERE id='%s'" % (id)
 
+def qr_get_user_name_by_id(id):
+    return "SELECT name FROM user WHERE id='%s'" % (id)
+
 def qr_get_user_by_email(email):
     return "SELECT name, email, auth, id, username FROM user WHERE email='%s'" % (email)
 
