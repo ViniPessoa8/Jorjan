@@ -1,4 +1,6 @@
 from ..config.db import get_connection
+from .category import get_categories
+from .queries.category_queries import qr_get_categories_seller_id
 from ..util.errors import (
     error_resp, 
     CouldNotRegisterProduct, 
@@ -11,7 +13,8 @@ from .queries.product_queries import (
     qr_get_product_id,
     qr_update_product_stock,
     qr_get_products,
-    qr_get_products_seller
+    qr_get_products_seller,
+    qr_get_products_seller_category
 )
 
 def register_new_product(product, owner_id):
@@ -86,19 +89,22 @@ def update_product_stock(product_id, quantity):
 def get_products_seller(seller_id):
     conn   = get_connection()
     result = None
-    return_json = None
 
     try:
         with conn.cursor() as c:
-            c.execute(qr_get_products_seller(seller_id))
-            result = c.fetchall()
-            json = result[0]
+            result = {}
+    
+            categories = get_categories()
+            s_categories = []
 
-            # for obj in result:
-            #     return_json
+            for category in categories['categories']:
+                c.execute(qr_get_products_seller_category(seller_id, category['id']))
+                products = c.fetchall()
+                category['products'] = products
+                if (products):
+                    s_categories.append(category)
 
-            # result = return_json
-            # print('[DEBUG] ', return_json)
+            result['categories'] = s_categories
     except BaseException:
         result = error_resp(CouldNotGetProduct())
     finally:
