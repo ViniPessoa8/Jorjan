@@ -32,6 +32,7 @@ from .queries.user_queries import (
     qr_set_user_state_by_id,
     qr_get_available_sellers,
     qr_update_user_profile,
+    qr_update_auth_user,
     qr_get_user_name_by_id
 )
 
@@ -271,6 +272,34 @@ def get_user_name_by_id(id):
         
     except BaseException:
         result = error_resp(CouldNotFindUserState())
+    finally:
+        conn.close()
+        return result
+
+def check_user_email(email):
+    conn   = get_connection()
+    result = None
+    
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_get_user_by_email(email=email))
+            result = c.fetchone()
+
+    except BaseException:
+        result = error_resp(CouldNotFindUserState())
+    finally:
+        conn.close()
+        return result
+    
+def update_auth_key_user(auth, email):
+    conn   = get_connection()
+    result = ()
+
+    try:
+        with conn.cursor() as c:
+            c.execute(qr_update_auth_user(auth=auth, email=email))
+        conn.commit()
+        result = True
     finally:
         conn.close()
         return result
